@@ -1,0 +1,9 @@
+services:
+  nasa-cpp:
+    container_name: nasa-cpp
+    image: nasa-cpp:latest
+    volumes:
+      - ./cfg:/etc/nasa-cpp
+    restart: unless-stopped
+    network_mode: host
+    command: tcp_hass_bridge

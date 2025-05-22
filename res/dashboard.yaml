@@ -1,0 +1,477 @@
+views:
+  - title: MONITOR
+    sections:
+      - type: grid
+        cards:
+          - square: false
+            type: grid
+            cards:
+              - type: tile
+                entity: sensor.samsung_ehs_operating_mode
+                features_position: bottom
+                vertical: true
+                name: OP MODE
+                grid_options:
+                  columns: 6
+                  rows: 2
+                show_entity_picture: false
+                hide_state: false
+                icon: mdi:eye
+              - type: tile
+                entity: sensor.samsung_ehs_3_way_valve
+                features_position: bottom
+                vertical: true
+                name: VALVE
+                icon_tap_action:
+                  action: none
+                icon: mdi:eye
+              - type: tile
+                entity: sensor.samsung_ehs_defrost_step
+                features_position: bottom
+                vertical: true
+                name: DEFROST
+                icon: mdi:eye
+          - square: false
+            type: grid
+            cards:
+              - type: tile
+                entity: switch.samsung_ehs_outing_mode
+                features_position: bottom
+                vertical: true
+                name: OUTING MODE
+                icon: mdi:circle-outline
+                icon_tap_action:
+                  action: none
+              - type: tile
+                entity: switch.samsung_ehs_silence_mode
+                features_position: bottom
+                vertical: true
+                icon: mdi:checkbox-blank-circle-outline
+                name: SILENT MODE
+                show_entity_picture: false
+                icon_tap_action:
+                  action: none
+            columns: 2
+          - square: false
+            type: grid
+            cards:
+              - type: tile
+                entity: select.samsung_ehs_mode
+                features_position: bottom
+                vertical: true
+                name: MODE
+                icon_tap_action:
+                  action: none
+                grid_options:
+                  columns: 6
+                  rows: 2
+                show_entity_picture: false
+                hide_state: false
+                icon: mdi:eye
+              - type: tile
+                entity: switch.samsung_ehs_zone1
+                features_position: bottom
+                vertical: true
+                show_entity_picture: false
+                icon: mdi:circle-outline
+                name: ZONE 1
+                icon_tap_action:
+                  action: none
+              - type: tile
+                entity: switch.samsung_ehs_zone2
+                features_position: bottom
+                vertical: true
+                icon_tap_action:
+                  action: none
+                icon: mdi:circle-outline
+                name: ZONE 2
+              - type: tile
+                entity: number.samsung_ehs_temp_water_law_target_f
+                features_position: bottom
+                vertical: true
+                name: WATER LAW
+                icon_tap_action:
+                  action: none
+            columns: 4
+            title: EHS
+          - square: false
+            type: grid
+            cards:
+              - type: tile
+                entity: select.samsung_ehs_dhw_mode
+                features_position: bottom
+                vertical: true
+                name: MODE
+                icon_tap_action:
+                  action: none
+                icon: mdi:eye
+              - type: tile
+                entity: switch.samsung_ehs_dhw
+                features_position: bottom
+                vertical: true
+                name: STATE
+                icon: mdi:circle-outline
+                icon_tap_action:
+                  action: none
+              - type: tile
+                entity: number.samsung_ehs_temp_dhw_target
+                features_position: bottom
+                vertical: true
+                show_entity_picture: false
+                name: TARGET
+                icon_tap_action:
+                  action: none
+            title: DHW
+          - type: entities
+            entities:
+              - entity: sensor.samsung_ehs_temp_dhw_tank
+                name: DHW Tank
+                secondary_info: last-updated
+              - entity: sensor.samsung_ehs_temp_outer
+                name: Outside Air
+                secondary_info: last-updated
+              - entity: sensor.samsung_ehs_temp_outlet_zone1
+                name: Outlet Zone 1
+                secondary_info: last-updated
+              - entity: sensor.samsung_ehs_temp_outlet_zone2
+                name: Outlet Zone 2
+                secondary_info: last-updated
+              - entity: sensor.samsung_ehs_temp_water_in
+                name: Outdoor Unit Water In
+                secondary_info: last-updated
+              - entity: sensor.samsung_ehs_temp_water_out
+                name: Outdoor Unit Water Out
+                secondary_info: last-updated
+            title: Temperatures
+            state_color: false
+            show_header_toggle: true
+          - type: entities
+            entities:
+              - entity: sensor.samsung_ehs_total_input_power
+                name: Total Input Power
+                secondary_info: last-updated
+              - entity: sensor.samsung_ehs_total_output_power
+                name: Total Output Power
+                secondary_info: last-updated
+              - entity: sensor.samsung_ehs_minutes_active
+                name: Minutes Active
+                secondary_info: last-updated
+              - entity: sensor.samsung_ehs_minutes_active_since_installation
+                name: Minutes Active Since Installation
+                secondary_info: last-updated
+            title: Life Cycle
+      - type: grid
+        cards:
+          - type: history-graph
+            entities:
+              - entity: sensor.samsung_ehs_temp_outlet_zone1
+                name: Water Outlet Z1
+              - entity: sensor.samsung_ehs_temp_outlet_zone2
+                name: Water Outlet Z2
+              - entity: sensor.samsung_ehs_temp_outer
+                name: Air Out
+              - entity: sensor.samsung_ehs_temp_water_in
+                name: Water In
+              - entity: sensor.samsung_ehs_temp_water_out
+                name: Water Out
+              - entity: sensor.samsung_ehs_temp_water_law_target
+                name: Water Law
+              - entity: sensor.samsung_ehs_temp_dhw_tank
+                name: DHW Tank
+            grid_options:
+              columns: full
+              rows: 6
+            min_y_axis: 0
+            max_y_axis: 70
+            fit_y_data: true
+          - type: history-graph
+            entities:
+              - entity: sensor.samsung_ehs_current_frequency_1
+                name: Comp. Freq.
+            grid_options:
+              columns: full
+              rows: 4
+          - type: history-graph
+            entities:
+              - entity: sensor.samsung_ehs_outdoor_fan1_rpm
+                name: Outdoor Fan Speed
+            grid_options:
+              columns: full
+              rows: 4
+          - type: history-graph
+            entities:
+              - entity: sensor.samsung_ehs_pwm
+                name: Pump PWM
+            max_y_axis: 100
+            grid_options:
+              columns: full
+              rows: 4
+        column_span: 2
+    type: sections
+    max_columns: 4
+    cards: []
+    path: monitor
+  - type: sections
+    title: PERFORMANCE
+    path: energy
+    sections:
+      - type: grid
+        cards:
+          - square: false
+            type: grid
+            cards:
+              - type: tile
+                features_position: bottom
+                vertical: true
+                entity: sensor.samsung_ehs_cop_last_24h
+                name: Last 24h
+              - type: tile
+                entity: sensor.samsung_ehs_cop_last_1h
+                features_position: bottom
+                vertical: true
+                name: Last 1h
+              - type: tile
+                features_position: bottom
+                vertical: true
+                entity: sensor.samsung_ehs_cop_today
+                name: Today
+            title: Coefficient of Performance
+          - square: false
+            type: grid
+            cards:
+              - type: tile
+                features_position: bottom
+                vertical: true
+                entity: sensor.samsung_ehs_daily_input_power
+                name: Input Today
+              - type: tile
+                entity: sensor.samsung_ehs_daily_output_power
+                features_position: bottom
+                vertical: true
+                name: Output Today
+            columns: 2
+            title: Power
+      - type: grid
+        cards:
+          - type: history-graph
+            entities:
+              - entity: sensor.samsung_ehs_cop_last_1h
+                name: Last hour
+              - entity: sensor.samsung_ehs_cop_last_24h
+                name: Last 24h
+              - entity: sensor.samsung_ehs_cop_today
+                name: Today
+            grid_options:
+              columns: full
+              rows: 5
+            title: COP
+            max_y_axis: 10
+          - chart_type: bar
+            period: day
+            type: statistics-graph
+            entities:
+              - entity: sensor.samsung_ehs_daily_input_power
+                name: Input power
+              - entity: sensor.samsung_ehs_daily_output_power
+                name: Output power
+            stat_types:
+              - change
+            grid_options:
+              columns: full
+              rows: 5
+            max_y_axis: 100
+          - type: history-graph
+            entities:
+              - entity: sensor.samsung_ehs_input_power_last_1h
+                name: Input Power Last Hour
+              - entity: sensor.samsung_ehs_input_power_last_24h
+                name: Input Power Last 24h
+              - entity: sensor.samsung_ehs_output_power_last_1h
+                name: Output Power Last Hour
+              - entity: sensor.samsung_ehs_output_power_last_24h
+                name: Output Power Last 24h
+            grid_options:
+              columns: full
+              rows: 5
+        column_span: 2
+    max_columns: 4
+    cards: []
+  - type: sections
+    max_columns: 3
+    title: FSV
+    path: field-setting-value
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Remote Controller Setting Range Code 10**
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: >-
+                  number.samsung_ehs_fsv_1011_water_out_temperature_for_cooling_max
+              - entity: >-
+                  number.samsung_ehs_fsv_1012_water_out_temperature_for_cooling_min
+              - entity: number.samsung_ehs_fsv_1021_room_temperature_for_cooling_max
+              - entity: number.samsung_ehs_fsv_1022_room_temperature_for_cooling_min
+              - entity: >-
+                  number.samsung_ehs_fsv_1031_water_out_temperature_for_heating_max
+              - entity: >-
+                  number.samsung_ehs_fsv_1032_water_out_temperature_for_heating_min
+              - entity: number.samsung_ehs_fsv_1041_room_temperature_for_heating_max
+              - entity: number.samsung_ehs_fsv_1042_room_temperature_for_heating_min
+              - entity: number.samsung_ehs_fsv_1051_dhw_tank_temperature_max
+              - entity: number.samsung_ehs_fsv_1052_dhw_tank_temperature_min
+            show_header_toggle: false
+            grid_options:
+              columns: full
+        column_span: 4
+      - type: grid
+        cards:
+          - type: heading
+            heading: Water Law Code 20**
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: >-
+                  number.samsung_ehs_fsv_2011_outdoor_temperature_for_heating_water_law_max_point
+              - entity: >-
+                  number.samsung_ehs_fsv_2012_outdoor_temperature_for_heating_water_law_min_point
+              - entity: >-
+                  number.samsung_ehs_fsv_2021_water_out_temperature_max_for_wl1_heating_max_point
+              - entity: >-
+                  number.samsung_ehs_fsv_2022_water_out_temperature_max_for_wl1_heating_min_point
+              - entity: >-
+                  number.samsung_ehs_fsv_2031_water_out_temperature_max_for_wl2_heating_max_point
+              - entity: >-
+                  number.samsung_ehs_fsv_2032_water_out_temperature_max_for_wl1_heating_min_point
+              - entity: select.samsung_ehs_fsv_2041_heating_water_law_selection
+              - entity: >-
+                  number.samsung_ehs_fsv_2051_outdoor_temperature_for_cooling_water_law_max_point
+              - entity: >-
+                  number.samsung_ehs_fsv_2052_outdoor_temperature_for_cooling_water_law_min_point
+              - entity: >-
+                  number.samsung_ehs_fsv_2061_water_out_temperature_for_wl1_cooling_max_point
+              - entity: >-
+                  number.samsung_ehs_fsv_2062_water_out_temperature_for_wl1_cooling_min_point
+              - entity: >-
+                  number.samsung_ehs_fsv_2071_water_out_temperature_for_wl2_cooling_max_point
+              - entity: >-
+                  number.samsung_ehs_fsv_2072_water_out_temperature_for_wl2_cooling_min_point
+              - entity: select.samsung_ehs_fsv_2081_cooling_water_law_selection
+              - entity: select.samsung_ehs_fsv_2091_external_room_thermostat_1
+              - entity: select.samsung_ehs_fsv_2092_external_room_thermostat_2
+              - entity: >-
+                  select.samsung_ehs_fsv_2093_remote_controller_room_temp_control
+            grid_options:
+              columns: full
+        column_span: 4
+      - type: grid
+        cards:
+          - type: heading
+            heading: Domestic Hot Water Tank Code 30**
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: select.samsung_ehs_fsv_3011_dhw_mode_activate
+              - entity: number.samsung_ehs_fsv_3021_heat_pump_max_temp
+              - entity: number.samsung_ehs_fsv_3022_heat_pump_stop
+              - entity: number.samsung_ehs_fsv_3023_heat_pump_start
+              - entity: number.samsung_ehs_fsv_3024_heat_pump_min_operating_time
+              - entity: number.samsung_ehs_fsv_3025_heat_pump_max_operating_time
+              - entity: number.samsung_ehs_fsv_3026_heat_pump_operation_interval
+              - entity: select.samsung_ehs_fsv_3031_booster_heater_on_off
+              - entity: number.samsung_ehs_fsv_3032_booster_heater_delay_time
+              - entity: number.samsung_ehs_fsv_3033_booster_heater_overshoot
+              - entity: select.samsung_ehs_fsv_3041_disinfection_on_off
+              - entity: select.samsung_ehs_fsv_3042_disinfection_interval
+              - entity: number.samsung_ehs_fsv_3043_disinfection_start_time
+              - entity: number.samsung_ehs_fsv_3044_disinfection_target_temp
+              - entity: number.samsung_ehs_fsv_3045_disinfection_duration
+              - entity: number.samsung_ehs_fsv_3046_disinfection_max_time
+              - entity: >-
+                  select.samsung_ehs_fsv_3051_forced_dhw_operation_timer_off_function
+              - entity: number.samsung_ehs_fsv_3052_forced_dhw_operation_time_duration
+              - entity: select.samsung_ehs_fsv_3061_solar_panel_h_p_combination
+              - entity: select.samsung_ehs_fsv_3071_3_way_valve_default_direction
+              - entity: number.samsung_ehs_fsv_3081_energy_metering_backup_heater_1
+              - entity: number.samsung_ehs_fsv_3082_energy_metering_backup_heater_2
+              - entity: number.samsung_ehs_fsv_3083_energy_metering_booster_heater
+            grid_options:
+              columns: full
+        column_span: 4
+      - type: grid
+        cards:
+          - type: heading
+            heading: Heating Code 40**
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: select.samsung_ehs_fsv_4011_heat_pump_heating_dhw_priority
+              - entity: >-
+                  number.samsung_ehs_fsv_4012_heat_pump_low_outdoor_temp_for_heating_priority
+              - entity: number.samsung_ehs_fsv_4013_heat_pump_heating_off_temp
+              - entity: select.samsung_ehs_fsv_4021_backup_heater_on_off
+              - entity: select.samsung_ehs_fsv_4022_backup_heater_buh_bsh_priority
+              - entity: >-
+                  select.samsung_ehs_fsv_4023_backup_heater_cold_weather_compensation
+              - entity: number.samsung_ehs_fsv_4024_backup_heater_treshold_temp
+              - entity: number.samsung_ehs_fsv_4025_backup_heater_defrost_backup_temp
+              - entity: select.samsung_ehs_fsv_4031_backup_boiler_on_off
+              - entity: select.samsung_ehs_fsv_4032_backup_boiler_priority
+              - entity: number.samsung_ehs_fsv_4033_backup_boiler_treshold_condition
+              - entity: select.samsung_ehs_fsv_4041_mixing_valve_application
+              - entity: >-
+                  number.samsung_ehs_fsv_4042_mixing_valve_target_delta_t_heating
+              - entity: >-
+                  number.samsung_ehs_fsv_4043_mixing_valve_target_delta_t_cooling
+              - entity: number.samsung_ehs_fsv_4044_mixing_valve_control_factor
+              - entity: number.samsung_ehs_fsv_4045_mixing_valve_control_interval
+              - entity: number.samsung_ehs_fsv_4046_mixing_valve_running_time
+              - entity: select.samsung_ehs_fsv_4051_inverter_pump_application
+              - entity: number.samsung_ehs_fsv_4052_inverter_pump_target_delta_t
+              - entity: number.samsung_ehs_fsv_4053_inverter_pump_control_factor
+              - entity: select.samsung_ehs_fsv_4061_zone_control_application
+            grid_options:
+              columns: full
+        column_span: 4
+      - type: grid
+        cards:
+          - type: heading
+            heading: Others Code 50**/60**
+            heading_style: subtitle
+          - type: entities
+            entities:
+              - entity: >-
+                  number.samsung_ehs_fsv_5011_outing_mode_water_out_temperature_for_cooling
+              - entity: >-
+                  number.samsung_ehs_fsv_5012_outing_mode_room_temperature_for_cooling
+              - entity: >-
+                  number.samsung_ehs_fsv_5013_outing_mode_water_out_temperature_for_heating
+              - entity: >-
+                  number.samsung_ehs_fsv_5014_outing_mode_room_temperature_for_heating
+              - entity: number.samsung_ehs_fsv_5015_outing_mode_cooling_wl1_temp
+              - entity: number.samsung_ehs_fsv_5016_outing_mode_cooling_wl2_temp
+              - entity: number.samsung_ehs_fsv_5017_outing_mode_heating_wl1_temp
+              - entity: number.samsung_ehs_fsv_5018_outing_mode_heating_wl2_temp
+              - entity: number.samsung_ehs_fsv_5019_outing_mode_dhw_tank_temp
+              - entity: number.samsung_ehs_fsv_5021_dhw_saving_temp
+              - entity: select.samsung_ehs_fsv_5022_dhw_saving_mode
+              - entity: number.samsung_ehs_fsv_5023_dhw_saving_thermo_on_temp
+              - entity: select.samsung_ehs_fsv_5041_power_peak_control_application
+              - entity: >-
+                  select.samsung_ehs_fsv_5042_power_peak_control_select_forced_off_parts
+              - entity: >-
+                  select.samsung_ehs_fsv_5043_power_peak_control_using_input_voltage
+              - entity: select.samsung_ehs_fsv_5051_frequency_ratio_control
+              - entity: select.samsung_ehs_fsv_5081_pv_control_application
+              - entity: >-
+                  number.samsung_ehs_fsv_5082_pv_control_setting_temp_shift_value_cooling
+              - entity: >-
+                  number.samsung_ehs_fsv_5083_pv_control_setting_temp_shift_value_heating
+              - entity: select.samsung_ehs_fsv_5091_smart_grid_control_application
+              - entity: number.samsung_ehs_fsv_5092_setting_temp_shift_value_heating
+            grid_options:
+              columns: full
+        column_span: 4
+    cards: []

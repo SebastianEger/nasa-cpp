@@ -1,0 +1,239 @@
+[
+    {
+        "name": "Error Code",
+        "message_number": "0x0202",
+        "hass": {
+            "type": "sensor"
+        }
+    },
+    {
+        "name": "Temp Outer",
+        "message_number": "0x420C",
+        "hass": {
+            "type": "sensor",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}"
+        }
+    },
+    {
+        "name": "Temp Water Law Target",
+        "message_number": "0x427F",
+        "hass": {
+            "type": "sensor",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}"
+        }
+    },
+    {
+        "name": "Temp Water In",
+        "message_number": "0x4236",
+        "hass": {
+            "type": "sensor",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}"
+        }
+    },
+    {
+        "name": "Temp Water Out",
+        "message_number": "0x4238",
+        "hass": {
+            "type": "sensor",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}"
+        }
+    },
+    {
+        "name": "Current Frequency 1",
+        "message_number": "0x8238",
+        "hass": {
+            "type": "sensor",
+            "unit_of_measurement": "Hz"
+        }
+    },
+    {
+        "name": "Outdoor Fan1 RPM",
+        "message_number": "0x823D",
+        "hass": {
+            "type": "sensor",
+            "unit_of_measurement": "rpm"
+        }
+    },
+    {
+        "name": "PWM",
+        "message_number": "0x40C4",
+        "hass": {
+            "type": "sensor",
+            "unit_of_measurement": "%"
+        }
+    },
+    {
+        "name": "3 Way Valve",
+        "message_number": "0x4067",
+        "hass": {
+            "type": "sensor",
+            "device_class": "enum",
+            "options": {
+                "ROOM": 0,
+                "TANK": 1
+            }
+        }
+    },
+    {
+        "name": "Temp DHW Tank",
+        "message_number": "0x4237",
+        "hass": {
+            "type": "sensor",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}"
+        }
+    },
+    {
+        "name": "Total Output Power",
+        "message_number": "0x4427",
+        "hass": {
+            "type": "sensor",
+            "device_class": "energy",
+            "unit_of_measurement": "Wh"
+        }
+    },
+    {
+        "name": "Total Input Power",
+        "message_number": "0x8414",
+        "hass": {
+            "type": "sensor",
+            "device_class": "energy",
+            "unit_of_measurement": "Wh"
+        }
+    },
+    {
+        "name": "Temp Outlet Zone1",
+        "message_number": "0x42D8",
+        "hass": {
+            "type": "sensor",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}"
+        }
+    },
+    {
+        "name": "Temp Zone 1",
+        "message_number": "0x4203",
+        "hass": {
+            "type": "sensor",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}"
+        }
+    },
+    {
+        "name": "Temp Outlet Zone2",
+        "message_number": "0x42D9",
+        "hass": {
+            "type": "sensor",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}"
+        }
+    },
+    {
+        "name": "Temp Zone 2",
+        "message_number": "0x42D4",
+        "hass": {
+            "type": "sensor",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}"
+        }
+    },
+    {
+        "name": "Operating Mode",
+        "message_number": "0x8001",
+        "hass": {
+            "type": "sensor",
+            "device_class": "enum",
+            "options": {
+                "OP_STOP": 0,
+                "OP_SAFETY": 1,
+                "OP_NORMAL": 2,
+                "OP_BALANCE": 3,
+                "OP_RECOVERY": 4
+            }
+        }
+    },
+    {
+        "name": "Backup Heater Mode",
+        "message_number": "0x406C",
+        "hass": {
+            "type": "sensor",
+            "device_class": "enum",
+            "options": {
+                "OFF": 0,
+                "STEP 1": 1,
+                "STEP 2": 2
+            }
+        }
+    },
+    {
+        "name": "Booster Heater Mode",
+        "message_number": "0x4087",
+        "hass": {
+            "type": "sensor",
+            "device_class": "enum",
+            "options": {
+                "OFF": 0,
+                "ON": 1
+            }
+        }
+    },
+    {
+        "name": "Flow Sensor",
+        "message_number": "0x42E9",
+        "hass": {
+            "type": "sensor",
+            "device_class": "volume_flow_rate",
+            "unit_of_measurement": "L/min",
+            "value_template": "{{ (value | float) / 10 }}"
+        }
+    },
+    {
+        "name": "Defrost Step",
+        "message_number": "0x8247",
+        "hass": {
+            "type": "sensor",
+            "device_class": "enum",
+            "options": {
+                "DEFROST_STAGE_1": 1,
+                "DEFROST_STAGE_2": 2,
+                "DEFROST_STAGE_3": 3,
+                "DEFROST_STAGE_4": 4,
+                "DEFROST_STAGE_5": 5,
+                "DEFROST_STAGE_6": 6,
+                "DEFROST_STAGE_END": 7,
+                "NO_DEFROST_OP": 255
+            }
+        }
+    },
+    {
+        "name": "Minutes Active",
+        "message_number": "0x4424",
+        "hass": {
+            "type": "sensor",
+            "device_class": "duration",
+            "unit_of_measurement": "min"
+        }
+    },
+    {
+        "name": "Minutes Active Since Installation",
+        "message_number": "0x4423",
+        "hass": {
+            "type": "sensor",
+            "device_class": "duration",
+            "unit_of_measurement": "min"
+        }
+    }
+]

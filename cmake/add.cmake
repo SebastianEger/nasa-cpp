@@ -1,0 +1,15 @@
+function(add_sample SAMPLE_NAME)
+        add_executable(${SAMPLE_NAME} samples/${SAMPLE_NAME}.cpp)
+        target_link_libraries(${SAMPLE_NAME} PRIVATE nasa-cpp)
+endfunction()
+
+function(add_app APP_NAME)
+        add_executable(${APP_NAME} apps/${APP_NAME}.cpp)
+        target_link_libraries(${APP_NAME} PRIVATE nasa-cpp)
+endfunction()
+
+function(add_test TEST_NAME)
+        add_executable(${TEST_NAME} test/test_${TEST_NAME}.cpp)
+        target_link_libraries(${TEST_NAME} PRIVATE gtest_main nasa-cpp)
+        gtest_discover_tests(${TEST_NAME})
+endfunction()

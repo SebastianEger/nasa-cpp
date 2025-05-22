@@ -1,0 +1,117 @@
+[
+    {
+        "name": "DHW",
+        "message_number": "0x4065",
+        "hass": {
+            "type": "switch"
+        }
+    },
+    {
+        "name": "DHW Mode",
+        "message_number": "0x4066",
+        "hass": {
+            "type": "select",
+            "options": {
+                "ECO": 0,
+                "STANDARD": 1,
+                "FORCED": 3
+            }
+        }
+    },
+    {
+        "name": "Temp DHW Target",
+        "message_number": "0x4235",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 40,
+            "max": 63,
+            "step": 1
+        }
+    },
+    {
+        "name": "Mode",
+        "message_number": "0x4001",
+        "hass": {
+            "type": "select",
+            "options": {
+                "AUTO": 0,
+                "COLD": 1,
+                "HEAT": 4
+            }
+        }
+    },
+    {
+        "name": "Zone1",
+        "message_number": "0x4000",
+        "hass": {
+            "type": "switch"
+        }
+    },
+    {
+        "name": "Zone 1 Target",
+        "message_number": "0x4201",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 16,
+            "max": 28,
+            "step": 0.5
+        }
+    },
+    {
+        "name": "Zone2",
+        "message_number": "0x411e",
+        "hass": {
+            "type": "switch"
+        }
+    },
+    {
+        "name": "Zone 2 Target",
+        "message_number": "0x42D6",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 16,
+            "max": 28,
+            "step": 0.5
+        }
+    },
+    {
+        "name": "Silence Mode",
+        "message_number": "0x4046",
+        "hass": {
+            "type": "switch"
+        }
+    },
+    {
+        "name": "Outing Mode",
+        "message_number": "0x406D",
+        "hass": {
+            "type": "switch"
+        }
+    },
+    {
+        "name": "Temp Water Law Target F",
+        "message_number": "0x4248",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": -5,
+            "max": 5,
+            "step": 0.5
+        }
+    }
+]

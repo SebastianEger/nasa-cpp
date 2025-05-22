@@ -1,0 +1,63 @@
+sensor:
+  - platform: statistics
+    name: "Samsung EHS Input Power Last 24h"
+    entity_id: sensor.samsung_ehs_total_input_power
+    state_characteristic: change
+    max_age:
+      hours: 24
+  - platform: statistics
+    name: "Samsung EHS Output Power Last 24h"
+    entity_id: sensor.samsung_ehs_total_output_power
+    state_characteristic: change
+    max_age:
+      hours: 24
+  - platform: statistics
+    name: "Samsung EHS Input Power Last 1h"
+    entity_id: sensor.samsung_ehs_total_input_power
+    state_characteristic: change
+    max_age:
+      hours: 1
+  - platform: statistics
+    name: "Samsung EHS Output Power Last 1h"
+    entity_id: sensor.samsung_ehs_total_output_power
+    state_characteristic: change
+    max_age:
+      hours: 1
+
+utility_meter:
+  samsung_ehs_daily_input_power:
+    name: Samsung EHS Daily Input Power
+    source: sensor.samsung_ehs_total_input_power
+    cycle: daily
+    unique_id: samsung_ehs_daily_input_power
+  samsung_ehs_daily_output_power:
+    name: Samsung EHS Daily Output Power
+    source: sensor.samsung_ehs_total_output_power
+    cycle: daily
+    unique_id: samsung_ehs_daily_output_power
+
+template:
+  - sensor:
+      - name: "Samsung EHS COP Last 24h"
+        unit_of_measurement: ""
+        state: >
+          {% set input = states('sensor.samsung_ehs_input_power_last_24h') | float %}
+          {% set output = states('sensor.samsung_ehs_output_power_last_24h') | float %}
+
+          {{ (output / input) | round(2, default=0) }}
+  - sensor:
+      - name: "Samsung EHS COP Last 1h"
+        unit_of_measurement: ""
+        state: >
+          {% set input = states('sensor.samsung_ehs_input_power_last_1h') | float %}
+          {% set output = states('sensor.samsung_ehs_output_power_last_1h') | float %}
+
+          {{ (output / input) | round(2, default=0) }}
+  - sensor:
+      - name: "Samsung EHS COP Today"
+        unit_of_measurement: ""
+        state: >
+          {% set input = states('sensor.samsung_ehs_daily_input_power') | float %}
+          {% set output = states('sensor.samsung_ehs_daily_output_power') | float %}
+
+          {{ (output / input) | round(2, default=0) }}

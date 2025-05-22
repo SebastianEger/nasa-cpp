@@ -1,0 +1,1199 @@
+[
+    {
+        "name": "FSV 1011 Water Out Temperature for Cooling Max",
+        "message_number": "0x424A",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 18,
+            "max": 25,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 1012 Water Out Temperature for Cooling Min",
+        "message_number": "0x424B",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 5,
+            "max": 18,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 1021 Room Temperature for Cooling Max",
+        "message_number": "0x424C",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 28,
+            "max": 30,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 1022 Room Temperature for Cooling Min",
+        "message_number": "0x424D",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 18,
+            "max": 28,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 1031 Water Out Temperature for Heating Max",
+        "message_number": "0x424E",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 37,
+            "max": 70,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 1032 Water Out Temperature for Heating Min",
+        "message_number": "0x424F",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 15,
+            "max": 37,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 1041 Room Temperature for Heating Max",
+        "message_number": "0x4250",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 18,
+            "max": 30,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 1042 Room Temperature for Heating Min",
+        "message_number": "0x4251",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 16,
+            "max": 18,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 1051 DHW Tank Temperature Max",
+        "message_number": "0x4252",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 50,
+            "max": 70,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 1052 DHW Tank Temperature Min",
+        "message_number": "0x4253",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 30,
+            "max": 70,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2011 Outdoor Temperature for Heating Water Law Max Point",
+        "message_number": "0x4254",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": -20,
+            "max": 5,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2012 Outdoor Temperature for Heating Water Law Min Point",
+        "message_number": "0x4255",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 10,
+            "max": 20,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2021 Water out Temperature Max for WL1 Heating Max Point",
+        "message_number": "0x4256",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 17,
+            "max": 70,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2022 Water out Temperature Max for WL1 Heating Min Point",
+        "message_number": "0x4257",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 17,
+            "max": 70,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2031 Water out Temperature Max for WL2 Heating Max Point",
+        "message_number": "0x4258",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 17,
+            "max": 70,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2032 Water out Temperature Max for WL1 Heating Min Point",
+        "message_number": "0x4259",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 17,
+            "max": 70,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2041 Heating Water Law Selection",
+        "message_number": "0x4093",
+        "hass": {
+            "type": "select",
+            "options": {
+                "WL1": 1,
+                "WL2": 2
+            }
+        }
+    },
+    {
+        "name": "FSV 2051 Outdoor Temperature for Cooling Water Law Max Point",
+        "message_number": "0x425A",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 25,
+            "max": 35,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2052 Outdoor Temperature for Cooling Water Law Min Point",
+        "message_number": "0x425B",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 35,
+            "max": 45,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2061 Water out Temperature for WL1 Cooling Max Point",
+        "message_number": "0x425C",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 5,
+            "max": 25,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2062 Water out Temperature for WL1 Cooling Min Point",
+        "message_number": "0x425D",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 5,
+            "max": 25,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2071 Water out Temperature for WL2 Cooling Max Point",
+        "message_number": "0x425E",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 5,
+            "max": 25,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2072 Water out Temperature for WL2 Cooling Min Point",
+        "message_number": "0x425F",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 5,
+            "max": 25,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 2081 Cooling Water Law Selection",
+        "message_number": "0x4094",
+        "hass": {
+            "type": "select",
+            "options": {
+                "WL1": 1,
+                "WL2": 2
+            }
+        }
+    },
+    {
+        "name": "FSV 2091 External Room Thermostat 1",
+        "message_number": "0x4095",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "OP1": 1,
+                "OP2": 2,
+                "OP3": 3,
+                "OP4": 4
+            }
+        }
+    },
+    {
+        "name": "FSV 2092 External Room Thermostat 2",
+        "message_number": "0x4096",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "OP1": 1,
+                "OP2": 2,
+                "OP3": 3,
+                "OP4": 4
+            }
+        }
+    },
+    {
+        "name": "FSV 2093 Remote Controller Room Temp Control",
+        "message_number": "0x4127",
+        "hass": {
+            "type": "select",
+            "options": {
+                "OP1": 1,
+                "OP2": 2,
+                "OP3": 3,
+                "OP4": 4
+            }
+        }
+    },
+    {
+        "name": "FSV 3011 DHW Mode Activate",
+        "message_number": "0x4097",
+        "hass": {
+            "type": "select",
+            "options": {
+                "OFF": 0,
+                "THERMO ON": 1,
+                "THERMO OFF": 2
+            }
+        }
+    },
+    {
+        "name": "FSV 3021 Heat Pump Max Temp",
+        "message_number": "0x4260",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 45,
+            "max": 63,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 3022 Heat Pump Stop",
+        "message_number": "0x4261",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 0,
+            "max": 10,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 3023 Heat Pump Start",
+        "message_number": "0x4262",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 5,
+            "max": 30,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 3024 Heat Pump Min Operating Time",
+        "message_number": "0x4263",
+        "hass": {
+            "type": "number",
+            "device_class": "duration",
+            "unit_of_measurement": "min",
+            "min": 1,
+            "max": 20,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 3025 Heat Pump Max Operating Time",
+        "message_number": "0x4264",
+        "hass": {
+            "type": "number",
+            "device_class": "duration",
+            "unit_of_measurement": "min",
+            "min": 5,
+            "max": 95,
+            "step": 5
+        }
+    },
+    {
+        "name": "FSV 3026 Heat Pump Operation Interval",
+        "message_number": "0x4265",
+        "hass": {
+            "type": "number",
+            "device_class": "duration",
+            "unit_of_measurement": "h",
+            "value_template": "{{ (value | float) / 60 }}",
+            "command_template": "{{ value * 60 }}",
+            "min": 0.5,
+            "max": 10,
+            "step": 0.5
+        }
+    },
+    {
+        "name": "FSV 3031 Booster Heater On Off",
+        "message_number": "0x4098",
+        "hass": {
+            "type": "select",
+            "options": {
+                "OFF": 0,
+                "ON": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 3032 Booster Heater Delay Time",
+        "message_number": "0x4266",
+        "hass": {
+            "type": "number",
+            "device_class": "duration",
+            "unit_of_measurement": "min",
+            "min": 20,
+            "max": 95,
+            "step": 5
+        }
+    },
+    {
+        "name": "FSV 3033 Booster Heater Overshoot",
+        "message_number": "0x4267",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 0,
+            "max": 4,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 3041 Disinfection On Off",
+        "message_number": "0x4099",
+        "hass": {
+            "type": "select",
+            "options": {
+                "OFF": 0,
+                "ON": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 3042 Disinfection Interval",
+        "message_number": "0x409A",
+        "hass": {
+            "type": "select",
+            "options": {
+                "SUNDAY": 0,
+                "MONDAY": 1,
+                "TUESDAY": 2,
+                "WEDNESDAY": 3,
+                "THURSDAY": 4,
+                "FRIDAY": 5,
+                "SATURDAY": 6,
+                "ALL": 7
+            }
+        }
+    },
+    {
+        "name": "FSV 3043 Disinfection Start Time",
+        "message_number": "0x4269",
+        "hass": {
+            "type": "number",
+            "device_class": "duration",
+            "unit_of_measurement": "h",
+            "min": 0,
+            "max": 23,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 3044 Disinfection Target Temp",
+        "message_number": "0x426A",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 40,
+            "max": 70,
+            "step": 5
+        }
+    },
+    {
+        "name": "FSV 3045 Disinfection Duration",
+        "message_number": "0x426B",
+        "hass": {
+            "type": "number",
+            "device_class": "duration",
+            "unit_of_measurement": "min",
+            "min": 5,
+            "max": 60,
+            "step": 5
+        }
+    },
+    {
+        "name": "FSV 3046 Disinfection Max Time",
+        "message_number": "0x42CE",
+        "hass": {
+            "type": "number",
+            "device_class": "duration",
+            "unit_of_measurement": "h",
+            "value_template": "{{ (value | float) / 60 }}",
+            "command_template": "{{ value * 60 }}",
+            "min": 1,
+            "max": 24,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 3051 Forced DHW Operation Timer Off Function",
+        "message_number": "0x409B",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 3052 Forced DHW Operation Time Duration",
+        "message_number": "0x426C",
+        "hass": {
+            "type": "number",
+            "device_class": "duration",
+            "unit_of_measurement": "min",
+            "value_template": "{{ (value | float) * 10 }}",
+            "command_template": "{{ (value / 10) | int }}",
+            "min": 30,
+            "max": 300,
+            "step": 10
+        }
+    },
+    {
+        "name": "FSV 3061 Solar Panel H P Combination",
+        "message_number": "0x409C",
+        "hass": {
+            "type": "select",
+            "options": {
+                "OFF": 0,
+                "ON": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 3071 3 Way Valve Default Direction",
+        "message_number": "0x409D",
+        "hass": {
+            "type": "select",
+            "options": {
+                "ROOM": 0,
+                "TANK": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 3081 Energy Metering Backup Heater 1",
+        "message_number": "0x42ED",
+        "hass": {
+            "type": "number",
+            "device_class": "power",
+            "unit_of_measurement": "kW",
+            "min": 1,
+            "max": 6,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 3082 Energy Metering Backup Heater 2",
+        "message_number": "0x42EE",
+        "hass": {
+            "type": "number",
+            "device_class": "power",
+            "unit_of_measurement": "kW",
+            "min": 0,
+            "max": 6,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 3083 Energy Metering Booster Heater",
+        "message_number": "0x42EF",
+        "hass": {
+            "type": "number",
+            "device_class": "power",
+            "unit_of_measurement": "kW",
+            "min": 1,
+            "max": 6,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 4011 Heat Pump Heating DHW Priority",
+        "message_number": "0x409E",
+        "hass": {
+            "type": "select",
+            "options": {
+                "DHW": 0,
+                "HEATING": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 4012 Heat Pump Low Outdoor Temp for Heating Priority",
+        "message_number": "0x426D",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": -15,
+            "max": 20,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 4013 Heat Pump Heating Off Temp",
+        "message_number": "0x426E",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 10,
+            "max": 35,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 4021 Backup Heater On Off",
+        "message_number": "0x409F",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 4022 Backup Heater BUH BSH Priority",
+        "message_number": "0x40A0",
+        "hass": {
+            "type": "select",
+            "options": {
+                "BOTH": 0,
+                "BUH": 1,
+                "BSH": 2
+            }
+        }
+    },
+    {
+        "name": "FSV 4023 Backup Heater Cold Weather Compensation",
+        "message_number": "0x40A1",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 4024 Backup Heater Treshold Temp",
+        "message_number": "0x4270",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": -25,
+            "max": 35,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 4025 Backup Heater Defrost Backup Temp",
+        "message_number": "0x4271",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 10,
+            "max": 55,
+            "step": 5
+        }
+    },
+    {
+        "name": "FSV 4031 Backup Boiler On Off",
+        "message_number": "0x40A2",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 4032 Backup Boiler Priority",
+        "message_number": "0x40A3",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 4033 Backup Boiler Treshold Condition",
+        "message_number": "0x4272",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": -20,
+            "max": 5,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 4041 Mixing Valve Application",
+        "message_number": "0x40C0",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "1": 1,
+                "2": 2
+            }
+        }
+    },
+    {
+        "name": "FSV 4042 Mixing Valve Target Delta T Heating",
+        "message_number": "0x4286",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 5,
+            "max": 15,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 4043 Mixing Valve Target Delta T Cooling",
+        "message_number": "0x4287",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 5,
+            "max": 15,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 4044 Mixing Valve Control Factor",
+        "message_number": "0x40C1",
+        "hass": {
+            "type": "number",
+            "min": 1,
+            "max": 5,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 4045 Mixing Valve Control Interval",
+        "message_number": "0x4288",
+        "hass": {
+            "type": "number",
+            "device_class": "duration",
+            "unit_of_measurement": "min",
+            "min": 1,
+            "max": 30,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 4046 Mixing Valve Running Time",
+        "message_number": "0x4289",
+        "hass": {
+            "type": "number",
+            "device_class": "duration",
+            "unit_of_measurement": "min",
+            "value_template": "{{ (value | float) * 10 }}",
+            "command_template": "{{ (value / 10) | int }}",
+            "min": 60,
+            "max": 240,
+            "step": 30
+        }
+    },
+    {
+        "name": "FSV 4051 Inverter Pump Application",
+        "message_number": "0x40C2",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 4052 Inverter Pump Target Delta T",
+        "message_number": "0x428A",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 2,
+            "max": 8,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 4053 Inverter Pump Control Factor",
+        "message_number": "0x40C3",
+        "hass": {
+            "type": "number",
+            "min": 1,
+            "max": 3,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 4061 Zone Control Application",
+        "message_number": "0x411A",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 5011 Outing Mode Water Out Temperature For Cooling",
+        "message_number": "0x4273",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 5,
+            "max": 25,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5012 Outing Mode Room Temperature For Cooling",
+        "message_number": "0x4274",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 18,
+            "max": 30,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5013 Outing Mode Water Out Temperature For Heating",
+        "message_number": "0x4275",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 15,
+            "max": 55,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5014 Outing Mode Room Temperature For Heating",
+        "message_number": "0x4276",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 16,
+            "max": 30,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5015 Outing Mode Cooling WL1 Temp",
+        "message_number": "0x4277",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 5,
+            "max": 25,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5016 Outing Mode Cooling WL2 Temp",
+        "message_number": "0x4278",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 5,
+            "max": 25,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5017 Outing Mode Heating WL1 Temp",
+        "message_number": "0x4279",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 15,
+            "max": 55,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5018 Outing Mode Heating WL2 Temp",
+        "message_number": "0x427A",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 15,
+            "max": 55,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5019 Outing Mode DHW Tank Temp",
+        "message_number": "0x427B",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 30,
+            "max": 70,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5021 DHW Saving Temp",
+        "message_number": "0x427C",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 0,
+            "max": 40,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5022 DHW Saving Mode",
+        "message_number": "0x4128",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 5023 DHW Saving Thermo On Temp",
+        "message_number": "0x42F0",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 0,
+            "max": 40,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5041 Power Peak Control Application",
+        "message_number": "0x40A4",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 5042 Power Peak Control Select Forced Off Parts",
+        "message_number": "0x40A5",
+        "hass": {
+            "type": "select",
+            "options": {
+                "ALL": 0,
+                "1": 1,
+                "2": 2,
+                "3": 3
+            }
+        }
+    },
+    {
+        "name": "FSV 5043 Power Peak Control Using Input Voltage",
+        "message_number": "0x40A6",
+        "hass": {
+            "type": "select",
+            "options": {
+                "LOW": 0,
+                "HIGH": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 5051 Frequency Ratio Control",
+        "message_number": "0x40A7",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 5081 PV Control Application",
+        "message_number": "0x411B",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 5082 PV Control Setting Temp Shift Value Cooling",
+        "message_number": "0x42DB",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 1,
+            "max": 20,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5083 PV Control Setting Temp Shift Value Heating",
+        "message_number": "0x42DC",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 1,
+            "max": 50,
+            "step": 1
+        }
+    },
+    {
+        "name": "FSV 5091 Smart Grid Control Application",
+        "message_number": "0x411C",
+        "hass": {
+            "type": "select",
+            "options": {
+                "NO": 0,
+                "YES": 1
+            }
+        }
+    },
+    {
+        "name": "FSV 5092 Setting Temp Shift Value Heating",
+        "message_number": "0x42DD",
+        "hass": {
+            "type": "number",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}",
+            "command_template": "{{ value * 10 }}",
+            "min": 1,
+            "max": 50,
+            "step": 1
+        }
+    }
+]
