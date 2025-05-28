@@ -42,10 +42,11 @@ int main(int argc, char **argv)
     // init tcp client
     TcpClient tcp_client(config_main["tcp"]["address"], config_main["tcp"]["port"]);
 
+    // init buffer
+    std::deque<uint8_t> buffer;
+
     // loop
     std::chrono::time_point<std::chrono::system_clock> tp_last_data = std::chrono::system_clock::now();
-    std::deque<uint8_t> buffer;
-    buffer.resize(buffer_limit);
     while (true)
     {
         if(buffer.size() > buffer_limit)
