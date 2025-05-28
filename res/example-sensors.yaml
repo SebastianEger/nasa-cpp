@@ -72,5 +72,3 @@ template:
           {% set waterin = states('sensor.samsung_ehs_temp_water_in') | float %}
           {% set waterlaw = states('sensor.samsung_ehs_temp_water_law_target') | float %}
           {{ (waterlaw - waterin) | round(2, default=0) }}
-          
-	
