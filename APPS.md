@@ -25,15 +25,10 @@ Check command is set to ```tcp_hass_bridge``` in [compose.yml](compose.yml), the
 docker compose up -d
 ```
 
-### [Example dashboard](res/dashboard.yaml)
-#### Monitor
-![Monitor](./imgs/dashboard_monitor.png)
+### [Example dashboard](res/example-dashboard.yaml)
+An example dashboard is provided, for full functionality additional [sensors](res/example-sensors.yaml) are necessary!
 
-#### Performance
-![Performance](./imgs/dashboard_performance.png)
-
-#### Field Setting Value
-![FSV](./imgs/dashboard_fsv.png)
+![Dashboard](res/example-dashboard.png)
 
 # 2 - TCP-FSV-LIST
 Read out all field setting values and export them to a csv file.
