@@ -93,7 +93,7 @@
         }
     },
     {
-        "name": "Total Output Power",
+        "name": "Total Output Energy",
         "message_number": "0x4427",
         "hass": {
             "type": "sensor",
@@ -103,7 +103,16 @@
         }
     },
     {
-        "name": "Total Input Power",
+        "name": "System Power",
+        "message_number": "0x8413",
+        "hass": {
+            "type": "sensor",
+            "device_class": "power",
+            "unit_of_measurement": "W"
+        }
+    },
+    {
+        "name": "Total Input Energy",
         "message_number": "0x8414",
         "hass": {
             "type": "sensor",
@@ -113,6 +122,16 @@
         }
     },
     {
+        "name": "Temp Zone 1",
+        "message_number": "0x4203",
+        "hass": {
+            "type": "sensor",
+            "device_class": "temperature",
+            "unit_of_measurement": "°C",
+            "value_template": "{{ (value | float) / 10 }}"
+        }
+    },
+        {
         "name": "Temp Outlet Zone1",
         "message_number": "0x42D8",
         "hass": {
@@ -123,8 +142,8 @@
         }
     },
     {
-        "name": "Temp Zone 1",
-        "message_number": "0x4203",
+        "name": "Temp Zone 2",
+        "message_number": "0x42D4",
         "hass": {
             "type": "sensor",
             "device_class": "temperature",

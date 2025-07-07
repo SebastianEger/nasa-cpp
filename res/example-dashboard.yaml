@@ -51,7 +51,7 @@ views:
                 name: Booster Heater
                 icon: mdi:water-boiler-alert
               - type: tile
-                entity: sensor.filtered_sensor
+                entity: sensor.samsung_ehs_error_filter
                 features_position: bottom
                 vertical: true
                 icon: mdi:alert
@@ -91,6 +91,16 @@ views:
                 name: IN
                 icon: mdi:thermometer-water
               - type: tile
+                entity: sensor.samsung_ehs_temp_water_out
+                features_position: bottom
+                vertical: true
+                name: OUT
+                icon: mdi:thermometer-water
+            columns: 3
+          - square: false
+            type: grid
+            cards:
+              - type: tile
                 entity: sensor.samsung_ehs_water_delta_t2
                 features_position: bottom
                 vertical: true
@@ -102,7 +112,7 @@ views:
                 vertical: true
                 icon: mdi:triangle-outline
                 name: OUT - IN
-            columns: 4
+            columns: 2
           - type: heading
             icon: mdi:gamepad-round
             heading: Control
@@ -173,7 +183,19 @@ views:
                 icon_tap_action:
                   action: none
                 icon: mdi:tune-variant
-            columns: 4
+              - type: tile
+                entity: number.samsung_ehs_zone_1_water_outlet_target
+                features_position: bottom
+                vertical: true
+                name: Z1 OUTLET
+                icon: mdi:tune-variant
+              - type: tile
+                entity: number.samsung_ehs_zone_2_water_outlet_target
+                features_position: bottom
+                vertical: true
+                name: Z2 TARGET
+                icon: mdi:tune-variant
+            columns: 3
           - type: heading
             icon: mdi:water-thermometer
             heading: DHW
@@ -294,16 +316,24 @@ views:
             icon: mdi:lightning-bolt
             heading: Power
             heading_style: subtitle
+          - type: tile
+            entity: sensor.samsung_ehs_system_power
+            features_position: bottom
+            vertical: true
+            name: System Power
+            grid_options:
+              columns: 12
+              rows: 2
           - square: false
             type: grid
             cards:
               - type: tile
                 features_position: bottom
                 vertical: true
-                entity: sensor.samsung_ehs_daily_input_power
+                entity: sensor.samsung_ehs_daily_input_energy
                 name: Input Today
               - type: tile
-                entity: sensor.samsung_ehs_daily_output_power
+                entity: sensor.samsung_ehs_daily_output_energy
                 features_position: bottom
                 vertical: true
                 name: Output Today
@@ -312,12 +342,12 @@ views:
             type: grid
             cards:
               - type: tile
-                entity: sensor.samsung_ehs_total_input_power
+                entity: sensor.samsung_ehs_total_input_energy
                 features_position: bottom
                 vertical: true
                 name: Total Input
               - type: tile
-                entity: sensor.samsung_ehs_total_output_power
+                entity: sensor.samsung_ehs_total_output_energy
                 features_position: bottom
                 vertical: true
                 name: Total Output
@@ -361,20 +391,34 @@ views:
             hours_to_show: 48
           - type: heading
             icon: mdi:lightning-bolt
-            heading: Daily Output/Input Power
+            heading: Energy
             heading_style: subtitle
           - chart_type: bar
             period: day
             type: statistics-graph
             entities:
-              - sensor.samsung_ehs_total_input_power
-              - sensor.samsung_ehs_total_output_power
+              - sensor.samsung_ehs_total_input_energy
+              - sensor.samsung_ehs_total_output_energy
             stat_types:
               - change
             grid_options:
-              columns: full
               rows: 5
+              columns: 12
             days_to_show: 14
+            title: Daily
+          - chart_type: bar
+            period: month
+            type: statistics-graph
+            entities:
+              - sensor.samsung_ehs_total_input_energy
+              - sensor.samsung_ehs_total_output_energy
+            stat_types:
+              - change
+            days_to_show: 365
+            title: Monthly
+            grid_options:
+              columns: 12
+              rows: 5
         column_span: 2
     max_columns: 4
     cards: []
@@ -559,3 +603,4 @@ views:
         column_span: 4
     cards: []
     dense_section_placement: true
+

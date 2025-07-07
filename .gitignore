@@ -2,4 +2,4 @@ build
 buildx.sh
 .~*
 *.csv
-res/NASA.xlsx
+*.xlsx

@@ -1,62 +1,69 @@
 sensor:
   - platform: statistics
-    name: "Samsung EHS Input Power Last 24h"
-    entity_id: sensor.samsung_ehs_total_input_power
+    name: "Samsung EHS Input Energy Last 24h"
+    entity_id: sensor.samsung_ehs_total_input_energy
     state_characteristic: change
     max_age:
       hours: 24
   - platform: statistics
-    name: "Samsung EHS Output Power Last 24h"
-    entity_id: sensor.samsung_ehs_total_output_power
+    name: "Samsung EHS Output Energy Last 24h"
+    entity_id: sensor.samsung_ehs_total_output_energy
     state_characteristic: change
     max_age:
       hours: 24
   - platform: statistics
-    name: "Samsung EHS Input Power Last 1h"
-    entity_id: sensor.samsung_ehs_total_input_power
+    name: "Samsung EHS Input Energy Last 1h"
+    entity_id: sensor.samsung_ehs_total_input_energy
     state_characteristic: change
     max_age:
       hours: 1
   - platform: statistics
-    name: "Samsung EHS Output Power Last 1h"
-    entity_id: sensor.samsung_ehs_total_output_power
+    name: "Samsung EHS Output Energy Last 1h"
+    entity_id: sensor.samsung_ehs_total_output_energy
     state_characteristic: change
     max_age:
       hours: 1
+  - platform: filter
+    name: "Samsung EHS Error Filter"
+    entity_id: sensor.samsung_ehs_error_code
+    filters:
+      - filter: range
+        lower_bound: 0
+        precision: 0
 
 utility_meter:
-  samsung_ehs_daily_input_power:
-    name: Samsung EHS Daily Input Power
-    source: sensor.samsung_ehs_total_input_power
+  samsung_ehs_daily_input_energy:
+    name: Samsung EHS Daily Input Energy
+    source: sensor.samsung_ehs_total_input_energy
     cycle: daily
-    unique_id: samsung_ehs_daily_input_power
-  samsung_ehs_daily_output_power:
-    name: Samsung EHS Daily Output Power
-    source: sensor.samsung_ehs_total_output_power
+    unique_id: samsung_ehs_daily_input_energy
+  samsung_ehs_daily_output_energy:
+    name: Samsung EHS Daily Output Energy
+    source: sensor.samsung_ehs_total_output_energy
     cycle: daily
-    unique_id: samsung_ehs_daily_output_power
+    unique_id: samsung_ehs_daily_output_energy
 
 template:
   - sensor:
       - name: "Samsung EHS COP Last 24h"
         unit_of_measurement: ""
         state: >
-          {% set input = states('sensor.samsung_ehs_input_power_last_24h') | float %}
-          {% set output = states('sensor.samsung_ehs_output_power_last_24h') | float %}
+          {% set input = states('sensor.samsung_ehs_input_energy_last_24h') | float %}
+          {% set output = states('sensor.samsung_ehs_output_energy_last_24h') | float %}
           {{ (output / input) | round(2, default=0) }}
   - sensor:
       - name: "Samsung EHS COP Last 1h"
         unit_of_measurement: ""
         state: >
-          {% set input = states('sensor.samsung_ehs_input_power_last_1h') | float %}
-          {% set output = states('sensor.samsung_ehs_output_power_last_1h') | float %}
+          {% set input = states('sensor.samsung_ehs_input_energy_last_1h') | float %}
+          {% set output = states('sensor.samsung_ehs_output_energy_last_1h') | float %}
           {{ (output / input) | round(2, default=0) }}
   - sensor:
       - name: "Samsung EHS COP Today"
         unit_of_measurement: ""
         state: >
-          {% set input = states('sensor.samsung_ehs_daily_input_power') | float %}
-          {% set output = states('sensor.samsung_ehs_daily_output_power') | float %}
+          {% set input = states('sensor.samsung_ehs_daily_input_energy') | float %}
+          {% set output = states('sensor.samsung_ehs_daily_output_energy') | float %}
           {{ (output / input) | round(2, default=0) }}
   - sensor:
       - name: "Samsung EHS Water Delta T"
