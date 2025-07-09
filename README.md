@@ -4,6 +4,8 @@ If you have a Samsung heat pump and want to integrate it into Home Assistant or 
 A NASA to Home Assistant bridge is already implemented and ready to use! <br>
 This project is still work in progress and there might some missing NASA messages <br>
 
+![Dashboard](res/example-dashboard.png)
+
 # Quick Start
 1) If you do not already have one, get a RS485 to ETH or WiFi adapter and connect it to your WiFi kit or control unit
 2) Build this project and update the tcp_hass_bridge config file
