@@ -1,7 +1,7 @@
 # nasa-cpp: master your heat pump!
 Implementation of the Samsung NASA protocol in C++ for monitoring and control. <br>
 If you have a Samsung heat pump and want to integrate it into Home Assistant or want to create your own control unit, this project is for you! <br>
-A NASA to Home Assistant bridge is already implemented and ready to use! <br>
+A NASA to Home Assistant MQTT bridge is already implemented and ready to use! <br>
 This project is still work in progress and there might some missing NASA messages <br>
 
 ![Dashboard](res/example-dashboard.png)
