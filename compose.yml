@@ -1,7 +1,7 @@
 services:
   nasa-cpp:
     container_name: nasa-cpp
-    image: nasa-cpp:latest
+    image: ghcr.io/sebastianeger/nasa-cpp:main
     volumes:
       - ./cfg:/etc/nasa-cpp
     restart: unless-stopped
