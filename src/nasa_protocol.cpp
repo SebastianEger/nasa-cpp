@@ -108,7 +108,7 @@ namespace nasacpp
             }
             else
             {
-                spdlog::warn("NasaProtocol: [DECDODE] result: {}", to_string(decode_result));
+                spdlog::warn("NasaProtocol: [DECODE] result: {}", to_string(decode_result));
             }
 
             // remove packet from buffer

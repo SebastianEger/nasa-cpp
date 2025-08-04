@@ -27,7 +27,7 @@
             "unit_of_measurement": "°C",
             "value_template": "{{ (value | float) / 10 }}",
             "command_template": "{{ value * 10 }}",
-            "min": 40,
+            "min": 30,
             "max": 63,
             "step": 1
         }

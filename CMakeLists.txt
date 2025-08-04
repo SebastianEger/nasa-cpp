@@ -13,29 +13,19 @@ option(BUILD_SAMPLES "Build samples" OFF)
 find_package(PahoMqttCpp REQUIRED)
 find_package(nlohmann_json 3.12.0 REQUIRED)
 
-# Lib
+# LIB
 file(GLOB SRC src/*.cpp)
 add_library(${PROJECT_NAME} SHARED ${SRC})
 target_link_libraries(${PROJECT_NAME} PUBLIC PahoMqttCpp::paho-mqttpp3)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
 list(APPEND INSTALL_TARGETS ${PROJECT_NAME})
 
-# Apps
+# APPS
 add_app(tcp_hass_bridge)
-add_app(tcp_fsv_list)
-
-# Samples
-if(BUILD_SAMPLES)
-  add_sample(tcp_reader)
-  add_sample(nasa_reader)
-  add_sample(mqtt_pub_sub)
-  add_sample(nasa_mqtt_reader)
-  add_sample(nasa_send_dhw_on)
-endif()
-
-# Install
 list(APPEND INSTALL_TARGETS tcp_hass_bridge)
+add_app(tcp_fsv_list)
 list(APPEND INSTALL_TARGETS tcp_fsv_list)
+
 install(TARGETS
           ${INSTALL_TARGETS}
         RUNTIME           # Following options apply to runtime artifacts.
@@ -57,7 +47,13 @@ install(DIRECTORY
           config       
         )
 
-# Tests
+if(BUILD_SAMPLES)
+  add_sample(mqtt_pub_sub)
+  add_sample(nasa_reader)
+  add_sample(nasa_send_dhw_on)
+  add_sample(tcp_reader)
+endif()
+
 if(BUILD_TESTS)
     # GOOGLETEST
     include(FetchContent)

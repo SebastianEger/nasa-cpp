@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "../src/nasa_protocol.h"
 
+using namespace nasacpp;
 
 TEST(NasaProtocol, CommandRead)
 {
