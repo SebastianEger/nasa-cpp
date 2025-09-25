@@ -210,7 +210,7 @@
         }
     },
     {
-        "name": "FSV 2032 Water out Temperature Max for WL1 Heating Min Point",
+        "name": "FSV 2032 Water out Temperature Max for WL2 Heating Min Point",
         "message_number": "0x4259",
         "hass": {
             "type": "number",
