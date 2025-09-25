@@ -471,7 +471,7 @@ views:
               - entity: >-
                   number.samsung_ehs_fsv_2031_water_out_temperature_max_for_wl2_heating_max_point
               - entity: >-
-                  number.samsung_ehs_fsv_2032_water_out_temperature_max_for_wl1_heating_min_point
+                  number.samsung_ehs_fsv_2032_water_out_temperature_max_for_wl2_heating_min_point
               - entity: select.samsung_ehs_fsv_2041_heating_water_law_selection
               - entity: >-
                   number.samsung_ehs_fsv_2051_outdoor_temperature_for_cooling_water_law_max_point
