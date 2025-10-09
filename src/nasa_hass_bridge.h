@@ -11,7 +11,6 @@ namespace nasacpp
 {
     class NasaHassBridge : public MqttClient
     {
-
     public:
         NasaHassBridge(const Address &sa, const json &cfg);
         ~NasaHassBridge();

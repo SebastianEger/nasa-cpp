@@ -18,7 +18,7 @@ namespace nasacpp
         loop_thread_.join();
     }
 
-    void NasaProtocol::insertDataRx(std::vector<uint8_t> data)
+    void NasaProtocol::insertDataRx(const std::vector<uint8_t>& data)
     {
         std::lock_guard<std::mutex> lock(mtx_data_in_);
         data_in_.insert(data_in_.end(), data.begin(), data.end());
@@ -28,11 +28,13 @@ namespace nasacpp
     {
         while (!shutdown_)
         {
+            std::vector<Packet> new_packets;
             {
                 std::unique_lock<std::mutex> lock(mtx_data_in_);
-                auto new_packets = decode(data_in_);
-
-                std::lock_guard<std::mutex> lock2(mtx_data_processed_);
+                new_packets = decode(data_in_);
+            }
+            {
+                std::lock_guard<std::mutex> lock(mtx_data_processed_);
                 data_processed_.insert(data_processed_.end(), new_packets.begin(), new_packets.end());
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -47,9 +49,8 @@ namespace nasacpp
         return data_copy;
     }
 
-    std::vector<uint8_t> NasaProtocol::encode(std::vector<Packet> &pkts)
+    std::vector<uint8_t> NasaProtocol::encode(const std::vector<Packet> &pkts)
     {
-
         std::vector<uint8_t> data_out;
         for (auto &pkt : pkts)
         {

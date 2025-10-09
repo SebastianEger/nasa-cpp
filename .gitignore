@@ -3,3 +3,4 @@ buildx.sh
 .~*
 *.csv
 *.xlsx
+.vscode

@@ -120,6 +120,7 @@ namespace nasacpp
         json payload;
 
         // create handler
+        std::lock_guard<std::mutex> lock(mtx_handler_);
         auto handler = createHandler(type, topic_state, (MessageNumber)msg_nr, sa_, data_type, device_class);
         if (handler && !msgnr_handler_.contains(msg_nr))
         {
@@ -127,7 +128,6 @@ namespace nasacpp
             payload = handler->init(cfg_hass);
 
             // update maps
-            std::lock_guard<std::mutex> lock(mtx_handler_);
             msgnr_handler_[msg_nr] = std::move(handler);
             topic_handler_[topic_state] = msgnr_handler_[msg_nr];
         }
@@ -159,7 +159,6 @@ namespace nasacpp
         if (payload.contains("command_topic"))
         {
             subscribe(topic_set);
-            std::lock_guard<std::mutex> lock(mtx_handler_);
             topic_handler_[topic_set] = msgnr_handler_[msg_nr];
         }
 

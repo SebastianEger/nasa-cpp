@@ -16,10 +16,10 @@ namespace nasacpp
         ~NasaProtocol();
 
     public:
-        void insertDataRx(std::vector<uint8_t> data);
+        void insertDataRx(const std::vector<uint8_t> &data);
         std::vector<Packet> getPacketsRx();
 
-        static std::vector<uint8_t> encode(std::vector<Packet> &pkts);
+        static std::vector<uint8_t> encode(const std::vector<Packet> &pkts);
         static std::vector<Packet> decode(std::deque<uint8_t> &data);
 
     private:

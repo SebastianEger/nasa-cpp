@@ -30,7 +30,6 @@ int main(int argc, char **argv)
         buffer_limit = config_main["buffer_limit"];
     }
     
-
     // init NASA to Home Assistant bridge
     Address sa;
     sa.a_class = AddressClass::JIGTester;
