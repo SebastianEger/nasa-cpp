@@ -4,7 +4,7 @@ services:
     image: ghcr.io/sebastianeger/nasa-cpp:main
     build:
       context: .
-      target: final
+      target: image-static
       args:
         BUILD_SHARED: OFF
         BUILD_STATIC: ON

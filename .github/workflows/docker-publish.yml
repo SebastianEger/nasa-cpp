@@ -78,6 +78,7 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           context: .
+          target: image-static
           build-args: |
             BUILD_SHARED=OFF
             BUILD_STATIC=ON

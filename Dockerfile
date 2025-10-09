@@ -49,8 +49,16 @@ RUN cmake -Bbuild -GNinja -DCMAKE_INSTALL_PREFIX=/install -DCMAKE_BUILD_TYPE=Rel
     -DNASACPP_BUILD_SAMPLES=OFF -DNASACPP_BUILD_TESTS=OFF
 RUN cmake --build build/ --target install
 
-# [FINAL]
-FROM base AS final
+# [STATIC]
+FROM base AS image-static
+COPY --from=build /install /usr/local
+COPY --from=build /etc/nasa-cpp /etc/nasa-cpp
+
+WORKDIR /
+CMD ["tcp_hass_bridge"]
+
+# [SHARED]
+FROM dev AS image-shared
 COPY --from=build /install /usr/local
 COPY --from=build /etc/nasa-cpp /etc/nasa-cpp
 
