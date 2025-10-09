@@ -2,6 +2,12 @@ services:
   nasa-cpp:
     container_name: nasa-cpp
     image: ghcr.io/sebastianeger/nasa-cpp:main
+    build:
+      context: .
+      target: final
+      args:
+        BUILD_SHARED: OFF
+        BUILD_STATIC: ON
     volumes:
       - ./cfg:/etc/nasa-cpp
     restart: unless-stopped

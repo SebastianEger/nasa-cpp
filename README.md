@@ -56,6 +56,8 @@ A powerful C++ implementation of the Samsung NASA protocol for heat pump monitor
    ```bash
    # Using Docker (recommended)
    docker build -t nasa-cpp:latest .
+   or
+   docker compose build
 
    # Or manually
    mkdir build && cd build
@@ -118,13 +120,13 @@ See [Applications Guide](APPS.md) for detailed configuration options.
 
 2. **Run Tests** (if enabled)
    ```bash
-   cmake -DBUILD_TESTS=ON ..
+   cmake -DNASACPP_BUILD_TESTS=ON ..
    ninja test
    ```
 
 3. **Build Samples** (if enabled)
    ```bash
-   cmake -DBUILD_SAMPLES=ON ..
+   cmake -DNASACPP_BUILD_SAMPLES=ON ..
    ninja
    ```
 

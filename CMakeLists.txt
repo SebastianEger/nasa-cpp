@@ -6,8 +6,9 @@ set(CMAKE_CXX_STANDARD 20)
 include(cmake/add.cmake)
 
 # Options
-option(BUILD_TESTS "Build tests" OFF)
-option(BUILD_SAMPLES "Build samples" OFF)
+option(BUILD_SHARED_LIBS "Build shared libs" ON)
+option(NASACPP_BUILD_TESTS "Build tests" ON)
+option(NASACPP_BUILD_SAMPLES "Build samples" ON)
 
 # Depdencies
 find_package(PahoMqttCpp REQUIRED)
@@ -15,16 +16,28 @@ find_package(nlohmann_json 3.12.0 REQUIRED)
 
 # LIB
 file(GLOB SRC src/*.cpp)
-add_library(${PROJECT_NAME} SHARED ${SRC})
+
+if(BUILD_SHARED_LIBS)
+  add_library(${PROJECT_NAME} SHARED ${SRC})
+else()
+  add_library(${PROJECT_NAME} STATIC ${SRC})
+endif()
+
 target_link_libraries(${PROJECT_NAME} PUBLIC PahoMqttCpp::paho-mqttpp3)
 target_include_directories(${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
 list(APPEND INSTALL_TARGETS ${PROJECT_NAME})
 
 # APPS
 add_app(tcp_hass_bridge)
-list(APPEND INSTALL_TARGETS tcp_hass_bridge)
 add_app(tcp_fsv_list)
+
+list(APPEND INSTALL_TARGETS tcp_hass_bridge)
 list(APPEND INSTALL_TARGETS tcp_fsv_list)
+
+if(NOT BUILD_SHARED_LIBS)
+  target_link_libraries(tcp_hass_bridge PRIVATE -static)
+  target_link_libraries(tcp_fsv_list PRIVATE -static)
+endif()
 
 install(TARGETS
           ${INSTALL_TARGETS}
@@ -47,14 +60,14 @@ install(DIRECTORY
           config       
         )
 
-if(BUILD_SAMPLES)
+if(NASACPP_BUILD_SAMPLES AND BUILD_SHARED_LIBS)
   add_sample(mqtt_pub_sub)
   add_sample(nasa_reader)
   add_sample(nasa_send_dhw_on)
   add_sample(tcp_reader)
 endif()
 
-if(BUILD_TESTS)
+if(NASACPP_BUILD_TESTS AND BUILD_SHARED_LIBS)
     # GOOGLETEST
     include(FetchContent)
     FetchContent_Declare(
