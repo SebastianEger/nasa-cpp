@@ -39,8 +39,8 @@ RUN cmake -Bbuild -GNinja -DCMAKE_INSTALL_PREFIX=/install -DJSON_BuildTests=OFF 
 RUN cmake --build build/ --target install
 
 # [DEV]
-FROM dev-build as dev
-COPY --from=build /install /usr/local
+FROM dev-base as dev
+COPY --from=dev-build /install /usr/local
 
 WORKDIR /
 CMD ["bash"]
