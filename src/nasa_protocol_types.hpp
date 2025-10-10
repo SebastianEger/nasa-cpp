@@ -428,6 +428,6 @@ namespace nasacpp
         std::vector<uint8_t> encode() const;
 
         // packet counter
-        static std::atomic<int> pkt_counter;
+        static std::atomic<uint8_t> pkt_counter;
     };
 } // namespace nasacpp

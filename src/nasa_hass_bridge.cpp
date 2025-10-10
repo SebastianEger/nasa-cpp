@@ -58,7 +58,7 @@ namespace nasacpp
             // check if handler is not null
             if (msg_hdl.second)
             {
-                msg_hdl.second->getPackets(pkts);
+                msg_hdl.second->getPacket(pkts);
             }
         }
     }

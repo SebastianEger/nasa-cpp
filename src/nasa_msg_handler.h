@@ -13,7 +13,7 @@ namespace nasacpp
     public:
         NasaMsgHandler(const MessageNumber &message_number, const Address &sa, const DataType &data_type = DataType::Read);
 
-        void getPackets(std::vector<Packet> &pkts);
+        void getPacket(std::vector<Packet> &pkts);
         void updateValue(const MessageSet &msg);
         void updateValueNew(const int &val);
         const DataType &getDataType() const;

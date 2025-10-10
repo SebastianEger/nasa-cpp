@@ -10,7 +10,7 @@ namespace nasacpp
     NasaMsgHandler::NasaMsgHandler(const MessageNumber &message_number, const Address &sa, const DataType &data_type)
         : message_number_(message_number), sa_(sa), data_type_(data_type), msg_set_type_(getMessageSetType(message_number)) {}
 
-    void NasaMsgHandler::getPackets(std::vector<Packet> &pkts)
+    void NasaMsgHandler::getPacket(std::vector<Packet> &pkts)
     {
         // send READ packet if value is not initialized yet
         if (val_is_ == INT_MAX && initial_read_out)

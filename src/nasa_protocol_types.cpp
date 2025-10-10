@@ -136,7 +136,7 @@ namespace nasacpp
     }
 
     // PACKET
-    std::atomic<int> Packet::pkt_counter = 0;
+    std::atomic<uint8_t> Packet::pkt_counter = 0;
     Packet Packet::create(Address sa, Address da, DataType data_type, MessageNumber message_number, int value)
     {
         Packet packet = createa_partial(sa, da, data_type);

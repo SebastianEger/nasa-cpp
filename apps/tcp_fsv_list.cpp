@@ -108,7 +108,7 @@ int main(int argc, char **argv)
             if (!msg_handler.second->hasVal())
             {
                 have_all_values = false;
-                msg_handler.second->getPackets(pkts_tx);
+                msg_handler.second->getPacket(pkts_tx);
             }
         }
         if (!pkts_tx.empty() && !pkts_rx.empty())
