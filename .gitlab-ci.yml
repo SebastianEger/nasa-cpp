@@ -1,0 +1,23 @@
+image: nasa-cpp:dev
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - cmake -Bbuild -GNinja -DCMAKE_INSTALL_PREFIX=/install -DCMAKE_BUILD_TYPE=Release -DNASACPP_BUILD_SAMPLES=ON -DNASACPP_BUILD_TESTS=ON 
+    - cmake --build build/ --target install 
+  artifacts:
+    expire_in: 2 hrs
+    paths:
+      - build/
+
+test:
+  stage: test
+  script:
+    - cd build
+    - ctest
+  dependencies:
+    - build
