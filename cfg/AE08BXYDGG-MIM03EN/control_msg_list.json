@@ -75,7 +75,7 @@
             "value_template": "{{ (value | float) / 10 }}",
             "command_template": "{{ value * 10 }}",
             "min": 10,
-            "max": 50,
+            "max": 63,
             "step": 0.5
         }
     },
@@ -110,7 +110,7 @@
             "value_template": "{{ (value | float) / 10 }}",
             "command_template": "{{ value * 10 }}",
             "min": 10,
-            "max": 50,
+            "max": 63,
             "step": 0.5
         }
     },
