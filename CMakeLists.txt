@@ -55,7 +55,14 @@ install(TARGETS
 install(DIRECTORY 
           cfg/
         DESTINATION
-          /etc/nasa-cpp
+          /etc/nasa-cpp/cfg
+        COMPONENT 
+          config       
+        )
+install(DIRECTORY 
+          msgs/
+        DESTINATION
+          /etc/nasa-cpp/msgs
         COMPONENT 
           config       
         )

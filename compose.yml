@@ -9,7 +9,8 @@ services:
         BUILD_SHARED: OFF
         BUILD_STATIC: ON
     volumes:
-      - ./cfg:/etc/nasa-cpp
+      - ./cfg:/etc/nasa-cpp/cfg
+      # - ./msgs:/etc/nasa-cpp/msgs
     restart: unless-stopped
     network_mode: host
     command: tcp_hass_bridge

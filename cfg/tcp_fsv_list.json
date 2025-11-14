@@ -3,5 +3,5 @@
         "address": "192.168.178.25",
         "port": 26
     },
-    "fsv_list": "/etc/nasa-cpp/AE08BXYDGG-MIM03EN/fsv_msg_list.json"
+    "fsv_list": "/etc/nasa-cpp/msgs/AE08BXYDGG-MIM03EN/fsv_msg_list.json"
 }
