@@ -9,7 +9,7 @@ using namespace nasacpp;
 int main(int argc, char **argv)
 {
     // read main config file
-    std::string config_filename = "/etc/nasa-cpp/tcp_hass_bridge.json";
+    std::string config_filename = "/etc/nasa-cpp/cfg/tcp_hass_bridge.json";
     if (argc > 1)
     {
         config_filename = std::string(argv[1]);

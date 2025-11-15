@@ -60,9 +60,9 @@ install(DIRECTORY
           config       
         )
 install(DIRECTORY 
-          msgs/
+          msg/
         DESTINATION
-          /etc/nasa-cpp/msgs
+          /etc/nasa-cpp/msg
         COMPONENT 
           config       
         )

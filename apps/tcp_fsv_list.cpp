@@ -23,7 +23,7 @@ struct MsgInfo
 int main(int argc, char **argv)
 {
     // read main config file
-    std::string config_filename = "/etc/nasa-cpp/tcp_fsv_list.json";
+    std::string config_filename = "/etc/nasa-cpp/cfg/tcp_fsv_list.json";
 
     // check argument
     if (argc > 1)

@@ -8,9 +8,9 @@
         "port": 1883,
         "client_id": "tcp_hass_bridge"
     },
-    "read_msg_list": "/etc/nasa-cpp/msgs/AE08BXYDGG-MIM03EN/sensor_msg_list.json",
-    "request_msg_list": "/etc/nasa-cpp/msgs/AE08BXYDGG-MIM03EN/control_msg_list.json",
-    "write_msg_list": "/etc/nasa-cpp/msgs/AE08BXYDGG-MIM03EN/fsv_msg_list.json",
+    "read_msg_list": "/etc/nasa-cpp/msg/AE08BXYDGG-MIM03EN/sensor_msg_list.json",
+    "request_msg_list": "/etc/nasa-cpp/msg/AE08BXYDGG-MIM03EN/control_msg_list.json",
+    "write_msg_list": "/etc/nasa-cpp/msg/AE08BXYDGG-MIM03EN/fsv_msg_list.json",
     "read_only": false,
     "disable_write_send": true,
     "initial_read_out": true,

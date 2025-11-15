@@ -10,7 +10,7 @@ int main(int argc, char **argv)
         mqtt_client.publish("nasacpp/test", "Hello world");
         mqtt_client.publish("nasacpp/topic", "Hello germany");
 
-        spdlog::info("Recv msgs: {0}", mqtt_client.getData().size());
+        spdlog::info("Recv msg: {0}", mqtt_client.getData().size());
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     return 0;
