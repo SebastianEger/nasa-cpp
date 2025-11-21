@@ -708,7 +708,8 @@
             "type": "select",
             "options": {
                 "NO": 0,
-                "YES": 1
+                "2-STAGE": 1,
+                "1-STAGE": 2
             }
         }
     },
