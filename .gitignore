@@ -4,3 +4,4 @@ buildx.sh
 *.csv
 *.xlsx
 .vscode
+logs
