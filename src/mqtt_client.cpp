@@ -1,5 +1,4 @@
 #include "mqtt_client.h"
-#include <spdlog/spdlog.h>
 
 namespace nasacpp
 {
@@ -13,7 +12,7 @@ namespace nasacpp
         conn_options_.set_clean_session(false);
 
         // create callback
-        cb_ = std::make_unique<callback>(*cli_, conn_options_);
+        cb_ = std::make_unique<callback>(*cli_, conn_options_, logger_);
 
         // set callback
         cli_->set_callback(*cb_);
@@ -21,13 +20,13 @@ namespace nasacpp
         // connect
         try
         {
-            spdlog::info("MqttClient: Connecting to the MQTT server '" + server_uri + "'...");
+            logger_->info("Connecting to the MQTT server '" + server_uri + "'...");
             auto conntok = cli_->connect(conn_options_, nullptr, *cb_);
             conntok->wait();
         }
         catch (const mqtt::exception &exc)
         {
-            spdlog::error("MqttClient: Unable to connect to MQTT server: '" + server_uri + "'" + exc.to_string());
+            logger_->error("Unable to connect to MQTT server: '" + server_uri + "'" + exc.to_string());
         }
     }
 
@@ -35,7 +34,6 @@ namespace nasacpp
     {
         try
         {
-
             mqtt::message_ptr pubmsg = mqtt::make_message(topic, payload);
             pubmsg->set_qos(qos_);
             pubmsg->set_retained(retained);
@@ -44,7 +42,7 @@ namespace nasacpp
         catch (const std::exception &e)
         {
             std::cerr << e.what() << '\n';
-            spdlog::error("MqttClient: Unable to publish message, error: {}", e.what());
+            logger_->error("Unable to publish message, error: {}", e.what());
         }
     }
 

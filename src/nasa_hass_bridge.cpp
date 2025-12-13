@@ -25,7 +25,7 @@ namespace nasacpp
             loadMsgListWrite(cfg["write_msg_list"]);
         }
 
-        spdlog::info("NasaHassBridge: Initialized {} NASA messages", topic_handler_.size());
+        logger_->info("Initialized {} NASA messages", topic_handler_.size());
         loop_thread_ = std::thread(&NasaHassBridge::loop, this);
     }
 
@@ -79,7 +79,7 @@ namespace nasacpp
                 }
                 else
                 {
-                    spdlog::warn("NasMqttClient: No handler for {}", msg->get_topic());
+                    logger_->warn("NasMqttClient: No handler for {}", msg->get_topic());
                 }
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -133,7 +133,7 @@ namespace nasacpp
         }
         else
         {
-            spdlog::error("NasaHassBridge: Invalid handler type {0} or handler for this message number {1} already exists", type, (int)msg_nr);
+            logger_->error("Invalid handler type {0} or handler for this message number {1} already exists", type, (int)msg_nr);
             return;
         }
 
@@ -163,7 +163,7 @@ namespace nasacpp
         }
 
         // finished!
-        spdlog::info("NasaHassBridge: Add topic {}", topic_config);
+        logger_->info("Add topic {}", topic_config);
     }
 
     void NasaHassBridge::loadMsgList(const std::string &filename, const DataType &data_type)
@@ -189,19 +189,19 @@ namespace nasacpp
 
     void NasaHassBridge::loadMsgListRead(const std::string &filename)
     {
-        spdlog::info("NasaHassBridge: Loading READ msg list {}", filename);
+        logger_->info("Loading READ msg list {}", filename);
         loadMsgList(filename, DataType::Read);
     }
 
     void NasaHassBridge::loadMsgListRequest(const std::string &filename)
     {
-        spdlog::info("NasaHassBridge: Loading REQUEST msg list {}", filename);
+        logger_->info("Loading REQUEST msg list {}", filename);
         loadMsgList(filename, DataType::Request);
     }
 
     void NasaHassBridge::loadMsgListWrite(const std::string &filename)
     {
-        spdlog::info("NasaHassBridge: Loading WRITE msg list {}", filename);
+        logger_->info("Loading WRITE msg list {}", filename);
         loadMsgList(filename, DataType::Write);
     }
 

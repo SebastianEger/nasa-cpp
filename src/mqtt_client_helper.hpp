@@ -1,10 +1,8 @@
 #pragma once
 
 #include <string>
-
-#include <spdlog/spdlog.h>
-
 #include <mqtt/async_client.h>
+#include <spdlog/sinks/stdout_color_sinks-inl.h>
 
 namespace nasacpp
 {
@@ -29,6 +27,8 @@ namespace nasacpp
         mqtt::async_client &cli_;
         mqtt::connect_options &connOpts_;
 
+        std::shared_ptr<spdlog::logger> logger_;
+
         void reconnect()
         {
             // wait 2.5 seconds for next reconnect
@@ -39,13 +39,13 @@ namespace nasacpp
             }
             catch (const mqtt::exception &exc)
             {
-                spdlog::error("Error: {}", exc.what());
+                logger_->error("Error: {}", exc.what());
             }
         }
 
         void on_failure(const mqtt::token &tok) override
         {
-            spdlog::warn("MqttClient: Connection attempt failed");
+            logger_->warn("MqttClient: Connection attempt failed");
             reconnect();
         }
 
@@ -53,18 +53,18 @@ namespace nasacpp
 
         void connected(const std::string &cause) override
         {
-            spdlog::info("MqttClient: Connected!");
+            logger_->info("MqttClient: Connected!");
         }
 
         void connection_lost(const std::string &cause) override
         {
-            spdlog::warn("MqttClient: Connection lost");
+            logger_->warn("MqttClient: Connection lost");
             if (!cause.empty())
             {
-                spdlog::warn("MqttClient: Cause: {}", cause);
+                logger_->warn("MqttClient: Cause: {}", cause);
             }
 
-            spdlog::info("MqttClient: Reconnecting ...");
+            logger_->info("MqttClient: Reconnecting ...");
             reconnect();
         }
 
@@ -79,8 +79,8 @@ namespace nasacpp
     public:
         friend MqttClient;
 
-        callback(mqtt::async_client &cli, mqtt::connect_options &connOpts)
-            : cli_(cli), connOpts_(connOpts)
+        callback(mqtt::async_client &cli, mqtt::connect_options &connOpts, std::shared_ptr<spdlog::logger> logger)
+            : cli_(cli), connOpts_(connOpts), logger_(logger)
         {
         }
     };

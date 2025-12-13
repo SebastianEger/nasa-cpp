@@ -8,13 +8,16 @@ using namespace nasacpp;
 
 int main(int argc, char **argv)
 {
+    // logger
+    std::shared_ptr<spdlog::logger> logger = spdlog::stdout_color_st("Main");
+
     // read main config file
     std::string config_filename = "/etc/nasa-cpp/cfg/tcp_hass_bridge.json";
     if (argc > 1)
     {
         config_filename = std::string(argv[1]);
     }
-    spdlog::info("Main: Loading config file {}", config_filename);
+    logger->info("Loading config file {}", config_filename);
     std::ifstream f(config_filename);
     json config_main = json::parse(f);
 
@@ -29,7 +32,7 @@ int main(int argc, char **argv)
     {
         buffer_limit = config_main["buffer_limit"];
     }
-    
+
     // init NASA to Home Assistant bridge
     Address sa;
     sa.a_class = AddressClass::JIGTester;
@@ -50,7 +53,7 @@ int main(int argc, char **argv)
     {
         if(buffer.size() > buffer_limit)
         {
-            spdlog::warn("Main: Buffer limit reached, clear buffer");
+            logger->warn("Buffer limit reached, clear buffer");
             buffer.clear();
         }
 
@@ -58,7 +61,7 @@ int main(int argc, char **argv)
         int n_new_bytes = tcp_client.getRecvData(buffer);
         if (n_new_bytes)
         {
-            spdlog::info("Main: [RECV] {} bytes", n_new_bytes);
+            logger->info("[RECV] {} bytes", n_new_bytes);
             tp_last_data = std::chrono::system_clock::now();
         }
 
@@ -66,7 +69,7 @@ int main(int argc, char **argv)
         auto pkts_rx = NasaProtocol::decode(buffer);
         if (!pkts_rx.empty())
         {
-            spdlog::info("Main: [DECODE] {} NASA packets", pkts_rx.size());
+            logger->info("[DECODE] {} NASA packets", pkts_rx.size());
             for (auto &pkt_rx : pkts_rx)
             {
                 for (auto &msg : pkt_rx.messages)
@@ -84,7 +87,7 @@ int main(int argc, char **argv)
             nasa_hass_bridge.getNasaPackets(pkts_tx);
             if (!pkts_tx.empty())
             {
-                spdlog::info("Main: [SEND] {} NASA packets ...", pkts_tx.size());
+                logger->info("[SEND] {} NASA packets ...", pkts_tx.size());
                 tcp_client.send(NasaProtocol::encode(pkts_tx));
             }
         }
@@ -92,7 +95,7 @@ int main(int argc, char **argv)
         // check connection timeout
         if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - tp_last_data).count() > timeout && tcp_client.connected())
         {
-            spdlog::warn("Main: No data received since {} seconds, forcing TcpClient to reconnect!", timeout);
+            logger->warn("No data received since {} seconds, forcing TcpClient to reconnect!", timeout);
             tcp_client.forceReconnect();
             tp_last_data = std::chrono::system_clock::now();
         }

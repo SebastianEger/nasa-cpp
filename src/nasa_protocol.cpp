@@ -1,10 +1,9 @@
 #include "nasa_protocol.h"
 
-#include <iostream>
-#include <spdlog/spdlog.h>
-
 namespace nasacpp
 {
+    std::shared_ptr<spdlog::logger> NasaProtocol::logger_ = spdlog::stdout_color_mt("NasaProtocol");
+
     NasaProtocol::NasaProtocol()
     {
         // create loop thread
@@ -109,7 +108,7 @@ namespace nasacpp
             }
             else
             {
-                spdlog::warn("NasaProtocol: [DECODE] result: {}", to_string(decode_result));
+                logger_->warn("[DECODE] result: {}", to_string(decode_result));
             }
 
             // remove packet from buffer

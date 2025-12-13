@@ -1,11 +1,10 @@
 #include "nasa_msg_handler.h"
 
-#include <spdlog/spdlog.h>
-
 namespace nasacpp
 {
     bool NasaMsgHandler::disable_write_send = false;
     bool NasaMsgHandler::initial_read_out = true;
+    std::shared_ptr<spdlog::logger> NasaMsgHandler::logger_ = spdlog::stdout_color_mt("NasaMsgHandler");
 
     NasaMsgHandler::NasaMsgHandler(const MessageNumber &message_number, const Address &sa, const DataType &data_type)
         : message_number_(message_number), sa_(sa), data_type_(data_type), msg_set_type_(getMessageSetType(message_number)) {}
@@ -28,7 +27,7 @@ namespace nasacpp
         // check if send packet is disabled by user config
         if (data_type_ == DataType::Write && disable_write_send)
         {
-            spdlog::warn("NasaMsgHandler: [SEND] disabled for [WRITE]!");
+            logger_->warn("[SEND] disabled for [WRITE]!");
             val_new_.store(val_is_);
             resetRetryCounter();
             return;
@@ -37,7 +36,7 @@ namespace nasacpp
         // check if val_new is set and retry counter not reached
         if (retry_ctr_ > 10)
         {
-            spdlog::warn("NasaMsgHandler: [SEND] retry counter reached!");
+            logger_->warn("[SEND] retry counter reached!");
             val_new_.store(val_is_);
             resetRetryCounter();
             return;
@@ -54,7 +53,7 @@ namespace nasacpp
         // check message number
         if (msg.message_number != message_number_)
         {
-            spdlog::error("NasaMsgHandler: [UPDATE] Message numbers do not match!");
+            logger_->error("[UPDATE] Message numbers do not match!");
             return;
         }
 

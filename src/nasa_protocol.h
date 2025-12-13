@@ -7,6 +7,8 @@
 #include <thread>
 #include <mutex>
 
+#include <spdlog/sinks/stdout_color_sinks-inl.h>
+
 namespace nasacpp
 {
     class NasaProtocol
@@ -34,5 +36,7 @@ namespace nasacpp
 
         std::mutex mtx_data_processed_;
         std::vector<Packet> data_processed_;
+
+        static std::shared_ptr<spdlog::logger> logger_;
     };
 } // namespace nasacpp
