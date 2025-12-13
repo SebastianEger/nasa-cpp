@@ -30,13 +30,16 @@ list(APPEND INSTALL_TARGETS ${PROJECT_NAME})
 # APPS
 add_app(tcp_hass_bridge)
 add_app(tcp_fsv_list)
+add_app(tcp_nasa_logger)
 
 list(APPEND INSTALL_TARGETS tcp_hass_bridge)
 list(APPEND INSTALL_TARGETS tcp_fsv_list)
+list(APPEND INSTALL_TARGETS tcp_nasa_logger)
 
 if(NOT BUILD_SHARED_LIBS)
   target_link_libraries(tcp_hass_bridge PRIVATE -static)
   target_link_libraries(tcp_fsv_list PRIVATE -static)
+  target_link_libraries(tcp_nasa_logger PRIVATE -static)
 endif()
 
 install(TARGETS

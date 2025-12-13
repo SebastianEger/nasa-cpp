@@ -3,8 +3,13 @@
 
 int main(int argc, char **argv)
 {
+    // init logger
+    std::shared_ptr<spdlog::logger> logger = spdlog::stdout_color_st("Main");
+    
+    // init tcp client
     nasacpp::TcpClient tcp_client("192.168.178.25", 26);
 
+    // start
     std::chrono::time_point<std::chrono::system_clock> tp_last_data = std::chrono::system_clock::now();
     while (true)
     {
@@ -12,12 +17,11 @@ int main(int argc, char **argv)
         if (!new_data.empty())
         {
             tp_last_data = std::chrono::system_clock::now();
-            spdlog::info("Recv data size: {0}", new_data.size());
+            logger->info("Recveived new data with size: {0}", new_data.size());
         }
 
         if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - tp_last_data).count() > 10)
         {
-            spdlog::info("Force reconnect");
             tcp_client.forceReconnect();
             tp_last_data = std::chrono::system_clock::now();
         }

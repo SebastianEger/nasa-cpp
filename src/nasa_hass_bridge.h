@@ -3,7 +3,7 @@
 #include "nasa_mqtt_handler.hpp"
 
 #include <set>
-
+#include <spdlog/sinks/stdout_color_sinks-inl.h>
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
@@ -46,5 +46,7 @@ namespace nasacpp
 
         // Device name
         std::string device_name_;
+
+        std::shared_ptr<spdlog::logger> logger_ = spdlog::stdout_color_st("NasaHassBridge");
     };
 } // namespace nasacpp

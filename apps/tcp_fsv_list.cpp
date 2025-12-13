@@ -22,6 +22,9 @@ struct MsgInfo
 
 int main(int argc, char **argv)
 {
+    // logger
+    std::shared_ptr<spdlog::logger> logger = spdlog::stdout_color_st("Main");
+
     // read main config file
     std::string config_filename = "/etc/nasa-cpp/cfg/tcp_fsv_list.json";
 
@@ -32,7 +35,7 @@ int main(int argc, char **argv)
     }
 
     // load config file
-    spdlog::info("Main: Loading config file {}", config_filename);
+    logger->info("Loading config file {}", config_filename);
     std::ifstream f(config_filename);
     json config_main = json::parse(f);
 
@@ -63,7 +66,7 @@ int main(int argc, char **argv)
 
         msg_infos.emplace_back(msg_nr, fsv_cfg["name"], value_template);
     }
-    spdlog::info("Main: Init {} NASA messages", msg_handlers.size());
+    logger->info("Init {} NASA messages", msg_handlers.size());
 
     // init tcp client
     TcpClient tcp_client(config_main["tcp"]["address"], config_main["tcp"]["port"]);
@@ -80,14 +83,14 @@ int main(int argc, char **argv)
         int n_new_bytes = tcp_client.getRecvData(buffer);
         if (n_new_bytes)
         {
-            spdlog::info("Main: [RECV] {} bytes", n_new_bytes);
+            logger->info("[RECV] {} bytes", n_new_bytes);
         }
 
         // decode packets and publish to mqtt
         auto pkts_rx = NasaProtocol::decode(buffer);
         if (!pkts_rx.empty())
         {
-            spdlog::info("Main: [DECODE] {} NASA packets", pkts_rx.size());
+            logger->info("[DECODE] {} NASA packets", pkts_rx.size());
             for (auto &pkt_rx : pkts_rx)
             {
                 for (auto &msg : pkt_rx.messages)
@@ -113,7 +116,7 @@ int main(int argc, char **argv)
         }
         if (!pkts_tx.empty() && !pkts_rx.empty())
         {
-            spdlog::info("Main: [SEND] {} NASA packets ...", pkts_tx.size());
+            logger->info("[SEND] {} NASA packets ...", pkts_tx.size());
             tcp_client.send(NasaProtocol::encode(pkts_tx));
         }
 
@@ -123,7 +126,7 @@ int main(int argc, char **argv)
 
     // open output file
     std::string output_filename = "fsv_list.csv";
-    spdlog::info("Main: Writing values to {}", output_filename);
+    logger->info("Writing values to {}", output_filename);
     std::ofstream output_file(output_filename);
 
     // header

@@ -5,8 +5,6 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-#include <spdlog/spdlog.h>
-
 namespace nasacpp
 {
     TcpClient::TcpClient(const std::string &address, int port) : address_(address), port_(port)
@@ -39,17 +37,17 @@ namespace nasacpp
 
         if (inet_pton(AF_INET, address_.c_str(), &serv_addr.sin_addr) <= 0)
         {
-            spdlog::error("TcpClient: Invalid address/ Address not supported");
+            logger_->error("Invalid address/ Address not supported");
             return false;
         }
 
-        spdlog::info("TcpClient: Trying to connect to server ...");
+        logger_->info("Trying to connect to server ...");
         if (connect(socket_, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
         {
-            spdlog::warn("TcpClient: Connection Failed");
+            logger_->warn("Connection Failed");
             return false;
         }
-        spdlog::info("TcpClient: Connected!");
+        logger_->info("Connected!");
 
         // test if the socket is in non-blocking mode
         if (fcntl(socket_, F_GETFL) & O_NONBLOCK)
@@ -71,6 +69,7 @@ namespace nasacpp
 
     void TcpClient::forceReconnect()
     {
+        logger_->info("Forcing reconnect!");
         connected_ = false;
     }
 
@@ -95,7 +94,7 @@ namespace nasacpp
                     }
                     catch (const std::exception &e)
                     {
-                        spdlog::error("TcpClient: Could not read socket, what: {}", e.what());
+                        logger_->error("Could not read socket, what: {}", e.what());
                     }
                 }
 

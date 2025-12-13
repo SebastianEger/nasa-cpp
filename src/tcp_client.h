@@ -5,6 +5,8 @@
 #include <mutex>
 #include <vector>
 
+#include <spdlog/sinks/stdout_color_sinks-inl.h>
+
 namespace nasacpp
 {
     class TcpClient
@@ -49,5 +51,8 @@ namespace nasacpp
         // buffer
         std::mutex mtx_recv_data_;
         std::vector<uint8_t> recv_data_;
+
+        // logger
+        std::shared_ptr<spdlog::logger> logger_ = spdlog::stdout_color_st("TcpClient");
     };
 } // namespace nasacpp

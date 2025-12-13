@@ -2,6 +2,8 @@
 
 #include "nasa_protocol_types.hpp"
 
+#include <spdlog/sinks/stdout_color_sinks-inl.h>
+
 namespace nasacpp
 {
     class NasaMsgHandler
@@ -32,5 +34,7 @@ namespace nasacpp
         const MessageSetType msg_set_type_;
 
         std::atomic<int> retry_ctr_ = 0;
+
+        static std::shared_ptr<spdlog::logger> logger_;
     };
 } // namespace nasacpp

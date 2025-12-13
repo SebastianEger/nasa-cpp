@@ -10,7 +10,8 @@ services:
         BUILD_STATIC: ON
     volumes:
       - ./cfg:/etc/nasa-cpp/cfg:ro
+      - ./logs:/var/nasa-cpp/logs:rw
       # - ./msg:/etc/nasa-cpp/msg:ro
     restart: unless-stopped
     network_mode: host
-    command: tcp_hass_bridge
+    command: tcp_nasa_logger # tcp_hass_bridge, tcp_fsv_list, tcp_nasa_logger

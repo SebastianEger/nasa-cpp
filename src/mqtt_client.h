@@ -2,6 +2,8 @@
 
 #include "mqtt_client_helper.hpp"
 
+#include <spdlog/sinks/stdout_color_sinks-inl.h>
+
 namespace nasacpp
 {
     class MqttClient
@@ -24,5 +26,7 @@ namespace nasacpp
         action_listener pub_listener_;
 
         int qos_ = 1;
+
+        std::shared_ptr<spdlog::logger> logger_ = spdlog::stdout_color_mt("MqttClient");
     };
 } // namespace nasacpp

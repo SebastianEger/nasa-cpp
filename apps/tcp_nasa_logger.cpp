@@ -3,21 +3,22 @@
 #include <nasa_hass_bridge.h>
 
 #include <fstream>
+#include <spdlog/sinks/basic_file_sink.h>
 
 using namespace nasacpp;
 
 int main(int argc, char **argv)
 {
     // logger
-    std::shared_ptr<spdlog::logger> logger = spdlog::stdout_color_st("Main");
+    auto logger = spdlog::basic_logger_mt("Main", "/var/nasa-cpp/logs/nasa_log.txt");
 
     // read main config file
-    std::string config_filename = "/etc/nasa-cpp/cfg/tcp_hass_bridge.json";
+    std::string config_filename = "/etc/nasa-cpp/cfg/tcp_nasa_logger.json";
     if (argc > 1)
     {
         config_filename = std::string(argv[1]);
     }
-    logger->info("Loading config file {}", config_filename);
+    spdlog::info("Loading config file {}", config_filename);
     std::ifstream f(config_filename);
     json config_main = json::parse(f);
 
@@ -32,14 +33,12 @@ int main(int argc, char **argv)
     {
         buffer_limit = config_main["buffer_limit"];
     }
-
+    
     // init NASA to Home Assistant bridge
     Address sa;
     sa.a_class = AddressClass::JIGTester;
     sa.channel = 0x00;
     sa.address = 0x00;
-
-    NasaHassBridge nasa_hass_bridge(sa, config_main);
 
     // init tcp client
     TcpClient tcp_client(config_main["tcp"]["address"], config_main["tcp"]["port"]);
@@ -72,23 +71,7 @@ int main(int argc, char **argv)
             logger->info("[DECODE] {} NASA packets", pkts_rx.size());
             for (auto &pkt_rx : pkts_rx)
             {
-                for (auto &msg : pkt_rx.messages)
-                {
-                    nasa_hass_bridge.publishToHass(msg);
-                }
-            }
-        }
-
-        // only send packet if pkts_tx is not empty, this makes sure no data is sent if the connection is lost
-        if (!config_main["read_only"] && !pkts_rx.empty())
-        {
-            // progress tx
-            std::vector<Packet> pkts_tx;
-            nasa_hass_bridge.getNasaPackets(pkts_tx);
-            if (!pkts_tx.empty())
-            {
-                logger->info("[SEND] {} NASA packets ...", pkts_tx.size());
-                tcp_client.send(NasaProtocol::encode(pkts_tx));
+                logger->info("{}", to_string(pkt_rx));
             }
         }
 
@@ -103,5 +86,7 @@ int main(int argc, char **argv)
         // wait
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
+
+    logger->flush();
     return 0;
 }
