@@ -269,8 +269,9 @@ function renderFlow() {
 function renderPills() {
   const pills = [];
   const err = val(N.error);
-  if (ent(N.error)) {
-    pills.push(err ? `<span class="pill bad"><span class="dot"></span>Error <b>E${num(err, 0)}</b></span>`
+  // the heat pump reports -1 or 0 when there is no error, any positive code is an error
+  if (ent(N.error) && err != null) {
+    pills.push(err > 0 ? `<span class="pill bad"><span class="dot"></span>Error <b>E${num(err, 0)}</b></span>`
       : `<span class="pill good"><span class="dot"></span>No errors</span>`);
   }
   const op = text(N.opMode);
