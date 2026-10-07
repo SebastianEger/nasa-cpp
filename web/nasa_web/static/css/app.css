@@ -203,7 +203,7 @@ svg { display: block; }
 .span-4 { grid-column: span 4; }
 
 /* ---------------------------------------------------------------- KPI tiles */
-.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
 .kpi { position: relative; overflow: hidden; padding: 16px 18px 44px; cursor: pointer; transition: border-color .15s, transform .15s; }
 .kpi:hover { border-color: var(--border-strong); transform: translateY(-1px); }
 .kpi .label { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-2); font-weight: 550; }

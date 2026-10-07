@@ -16,10 +16,11 @@ const ICONS = {
 
 const KPIS = [
   { key: N.outdoor, label: "Outdoor", icon: "temp", cls: "cool", color: "--s1" },
-  { key: N.waterOut, label: "Flow temperature", icon: "flame", cls: "heat", color: "--s2" },
-  { key: N.tank, label: "Hot water tank", icon: "drop", cls: "heat", color: "--s5" },
-  { key: N.room1, label: "Room (zone 1)", icon: "home", cls: "accent", color: "--s7" },
-  { key: N.power, label: "Electrical power", icon: "bolt", cls: "good", color: "--s3" },
+  { key: N.waterOut, label: "Flow temp", icon: "flame", cls: "heat", color: "--s2" },
+  { key: N.tank, label: "Hot water", icon: "drop", cls: "heat", color: "--s5" },
+  { key: N.room1, label: "Room zone 1", icon: "home", cls: "accent", color: "--s7" },
+  { key: N.room2, label: "Room zone 2", icon: "home", cls: "accent", color: "--s4" },
+  { key: N.power, label: "Power", icon: "bolt", cls: "good", color: "--s3" },
 ];
 
 let root, chart, sparkData = {}, timers = [], raf = 0;
@@ -79,7 +80,8 @@ export default {
         { label: "Flow out", color: "--s2", unit: "°C" },
         { label: "Return", color: "--s3", unit: "°C" },
         { label: "DHW tank", color: "--s5", unit: "°C" },
-        { label: "Room", color: "--s7", unit: "°C" },
+        { label: "Room zone 1", color: "--s7", unit: "°C" },
+        { label: "Room zone 2", color: "--s4", unit: "°C" },
       ],
       unit: "°C",
       height: 250,
@@ -190,11 +192,15 @@ function flowSvg() {
     </g>
 
     <!-- house -->
-    <g class="target" id="f-house" data-entity="${id(N.room1)}" style="cursor:pointer">
+    <g class="target" id="f-house">
       <path d="M630,70 L720,16 L810,70 V160 H630Z" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-linejoin="round"/>
-      <text class="lbl" x="720" y="88" text-anchor="middle">Heating</text>
-      <text class="val" x="720" y="118" text-anchor="middle" id="f-room">–</text>
-      <text class="val-sm" x="720" y="142" text-anchor="middle" id="f-room-t"></text>
+      <text class="lbl" x="720" y="62" text-anchor="middle">Heating</text>
+      ${[1, 2].map((z) => `
+      <g id="f-z${z}" data-entity="${id(z === 1 ? N.room1 : N.room2)}" style="cursor:pointer">
+        <text class="lbl" x="644" y="${z === 1 ? 104 : 140}">Zone ${z}</text>
+        <text class="val" x="748" y="${z === 1 ? 105 : 141}" text-anchor="end" style="font-size:17px" id="f-z${z}-v">–</text>
+        <text class="val-sm" x="798" y="${z === 1 ? 105 : 141}" text-anchor="end" style="font-size:11px" id="f-z${z}-t"></text>
+      </g>`).join("")}
     </g>
 
     <!-- tank -->
@@ -242,9 +248,13 @@ function renderFlow() {
   setText("#f-out", deg(val(N.waterOut)));
   setText("#f-in", deg(val(N.waterIn)));
   setText("#f-flow", `${num(flow, 1)} L/min`);
-  setText("#f-room", deg(val(N.room1)));
-  const z1t = val(N.zone1Target);
-  setText("#f-room-t", z1t == null ? "" : `target ${num(z1t, 1)}°`);
+  for (const [z, room, sw, target] of [[1, N.room1, N.zone1, N.zone1Target], [2, N.room2, N.zone2, N.zone2Target]]) {
+    const on = text(sw) !== "OFF";
+    const t = val(target);
+    setText(`#f-z${z}-v`, deg(val(room)));
+    setText(`#f-z${z}-t`, !on ? "off" : t == null ? "" : `→ ${num(t, 1)}°`);
+    svg.querySelector(`#f-z${z}`).style.opacity = !ent(room) ? "0" : on ? "1" : "0.45";
+  }
   const tank = val(N.tank), tankT = val(N.dhwTarget);
   setText("#f-tank-v", deg(tank));
   setText("#f-tank-t", tankT == null ? "" : `target ${num(tankT, 0)}°`);
@@ -359,8 +369,8 @@ function renderControls() {
 /* ----------------------------------------------------------------- history */
 
 async function loadHistory() {
-  const keys = [N.outdoor, N.waterOut, N.waterIn, N.tank, N.room1];
-  const states = [[N.valve, "3-way valve"], [N.opMode, "Compressor"], [N.defrost, "Defrost"]];
+  const keys = [N.outdoor, N.waterOut, N.waterIn, N.tank, N.room1, N.room2];
+  const states = [[N.valve, "3-way valve"], [N.opMode, "Compressor"], [N.zone1, "Zone 1"], [N.zone2, "Zone 2"], [N.defrost, "Defrost"]];
   const ids = [...new Set([...keys, N.power, ...states.map((x) => x[0])].map((k) => ent(k)?.id).filter(Boolean))];
   if (!ids.length) return;
   const end = Date.now() / 1000, start = end - 86400;
@@ -371,7 +381,7 @@ async function loadHistory() {
       const s = res.series[ent(k)?.id];
       return s ? [s.t, s.v] : [[], []];
     }));
-    const rows = states.filter(([n]) => res.series[ent(n)?.id]).map(([n, label]) => ({ label, data: res.series[ent(n).id], order: ent(n).options }));
+    const rows = states.filter(([n]) => res.series[ent(n)?.id]).map(([n, label]) => ({ label, data: res.series[ent(n).id], order: ent(n).kind === "binary" ? ["ON", "OFF"] : ent(n).options }));
     timeline(root.querySelector("#ov-activity"), rows, start, end);
     sparkData = {};
     for (const k of KPIS) {

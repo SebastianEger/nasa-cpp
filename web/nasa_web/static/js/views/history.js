@@ -7,13 +7,13 @@ const RANGES = [["1h", 3600], ["6h", 6 * 3600], ["24h", 86400], ["7d", 7 * 86400
 
 const PANELS = [
   { id: "temps", title: "Temperatures", unit: "°C", span: 12, height: 300,
-    series: [[N.outdoor, "Outdoor"], [N.waterOut, "Flow out"], [N.waterIn, "Return"], [N.tank, "DHW tank"], [N.room1, "Room"], [N.lawTarget, "Water law target"]] },
+    series: [[N.outdoor, "Outdoor"], [N.waterOut, "Flow out"], [N.waterIn, "Return"], [N.tank, "DHW tank"], [N.room1, "Room zone 1"], [N.room2, "Room zone 2"], [N.lawTarget, "Water law target"]] },
   { id: "power", title: "Electrical power", unit: "W", span: 12, height: 220, series: [[N.power, "Power"]] },
   { id: "freq", title: "Compressor frequency", unit: "Hz", span: 6, height: 200, series: [[N.freq, "Frequency"]] },
   { id: "flow", title: "Water flow", unit: "L/min", span: 6, height: 200, series: [[N.flow, "Flow"]] },
 ];
 
-const STATES = [[N.valve, "3-way valve"], [N.opMode, "Operation"], [N.dhw, "DHW"], [N.zone1, "Zone 1"], [N.defrost, "Defrost"], [N.backup, "Backup heater"]];
+const STATES = [[N.valve, "3-way valve"], [N.opMode, "Operation"], [N.dhw, "DHW"], [N.zone1, "Zone 1"], [N.zone2, "Zone 2"], [N.defrost, "Defrost"], [N.backup, "Backup heater"]];
 
 let root, charts = [], span = 86400, end = null, timer = null, custom = [];
 try { custom = JSON.parse(localStorage.getItem("history.custom") || "[]"); } catch (e) { custom = []; }
