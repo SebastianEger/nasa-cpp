@@ -15,3 +15,23 @@ services:
     restart: unless-stopped
     network_mode: host
     command: tcp_nasa_logger # tcp_hass_bridge, tcp_fsv_list, tcp_nasa_logger
+
+  # Web dashboard with history (see web/README.md). Uses the same MQTT broker as tcp_hass_bridge.
+  nasa-web:
+    container_name: nasa-web
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+      target: runtime
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      MQTT_HOST: localhost
+      MQTT_PORT: 1883
+      HTTP_PORT: 8080
+      RETENTION_DAYS: 365
+    volumes:
+      - nasa-web-data:/data
+
+volumes:
+  nasa-web-data:

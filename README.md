@@ -95,6 +95,15 @@ Field Setting Value management tool.
 - Safety controls
 - [Usage Guide](APPS.md#2-tcp-fsv-list)
 
+### 3. Web Dashboard (`web/`)
+A standalone web UI with history. No Home Assistant needed.
+- Live animated system view, controls and FSV settings
+- History charts and daily/monthly energy & COP, stored in SQLite
+- Runs next to the bridge: `docker compose up -d nasa-web` → http://localhost:8080
+- [Web Dashboard Guide](web/README.md)
+
+![Web Dashboard](res/web-dashboard.png)
+
 ## 📝 Configuration
 
 All configuration is done via JSON files in the `cfg/` directory:
