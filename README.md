@@ -9,7 +9,7 @@ heat pumps. nasa-cpp talks to the heat pump's RS485 bus through a network serial
 publishes its data to MQTT, with Home Assistant discovery. A standalone web dashboard with long-term
 history is included as well.
 
-![Home Assistant dashboard](res/example-dashboard.png)
+![nasa-web dashboard](res/web-dashboard.png)
 
 ## Contents
 
@@ -51,8 +51,6 @@ Samsung heat pump ─ RS485 (NASA bus) ─ RS485/TCP adapter ─ LAN ─ nasa-cp
 | `tcp_fsv_list` | Reads all field setting values (FSV) once and exports them to CSV | [APPS.md](APPS.md#2-tcp_fsv_list) |
 | `tcp_nasa_logger` | Logs all decoded NASA packets to a file, for analysis and debugging | [APPS.md](APPS.md#3-tcp_nasa_logger) |
 | `nasa-web` | Standalone web dashboard with history, energy statistics and controls | [web/README.md](web/README.md) |
-
-![nasa-web dashboard](res/web-dashboard.png)
 
 ## Supported devices
 
@@ -108,8 +106,8 @@ docker run --rm --network host -v ./cfg:/etc/nasa-cpp/cfg:ro \
     ghcr.io/sebastianeger/nasa-cpp:main tcp_hass_bridge
 ```
 
-For Home Assistant, the example [dashboard](res/example-dashboard.yaml) and
-[template sensors](res/example-sensors.yaml) (daily energy and COP) are a good starting point.
+For Home Assistant, an example dashboard and additional sensors (daily energy and COP) are described
+in [res/README.md](res/README.md).
 
 ## Configuration
 
@@ -204,7 +202,7 @@ cfg/         application configuration files
 samples/     small example programs using the library
 test/        unit tests (GoogleTest)
 web/         nasa-web dashboard (Python backend and web frontend)
-res/         Home Assistant examples and screenshots
+res/         Home Assistant examples and screenshots (see res/README.md)
 ```
 
 ## Documentation
@@ -212,6 +210,7 @@ res/         Home Assistant examples and screenshots
 - [APPS.md](APPS.md): applications and all configuration options
 - [HARDWARE.md](HARDWARE.md): RS485 adapter, wiring and adapter settings
 - [web/README.md](web/README.md): web dashboard, deployment and API
+- [res/README.md](res/README.md): Home Assistant dashboard and sensor examples
 - [NASA protocol wiki](https://wiki.myehs.eu/wiki/NASA_Protocol): protocol background and message numbers
 
 ## Contributing

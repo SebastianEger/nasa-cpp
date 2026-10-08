@@ -68,12 +68,8 @@ docker compose up -d nasa-cpp      # with command: tcp_hass_bridge in compose.ym
 ### Home Assistant
 
 The entities appear under the device **Samsung EHS** once the MQTT integration is set up in Home
-Assistant. Examples are provided in `res/`:
-
-- [`res/example-dashboard.yaml`](res/example-dashboard.yaml): dashboard (see screenshot below)
-- [`res/example-sensors.yaml`](res/example-sensors.yaml): statistics, utility meters and COP template sensors
-
-![Home Assistant dashboard](res/example-dashboard.png)
+Assistant. An example dashboard and additional sensors (energy statistics, COP) are described in
+[res/README.md](res/README.md).
 
 ## 2. `tcp_fsv_list`
 
