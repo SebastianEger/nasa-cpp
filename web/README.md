@@ -90,7 +90,8 @@ All settings are environment variables.
 
 At the defaults, expect roughly 50 MB of database per month for the standard sensor and control lists.
 
-> ⚠️ The UI has no authentication. Keep it inside your LAN or put it behind a reverse proxy with auth.
+> [!WARNING]
+> The UI has no authentication. Keep it inside your LAN or put it behind a reverse proxy with auth.
 > Set `READ_ONLY=true` if it should only display data. FSV writes only reach the heat pump when the
 > bridge runs with `"disable_write_send": false`.
 
