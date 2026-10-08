@@ -5,3 +5,8 @@ buildx.sh
 *.xlsx
 .vscode
 logs
+
+# nasa-web
+web/data
+__pycache__
+.pytest_cache

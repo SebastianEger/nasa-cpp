@@ -1,0 +1,7 @@
+# used instead of the root .dockerignore when building web/Dockerfile (context: repo root)
+*
+!web/requirements.txt
+!web/nasa_web
+!web/tools
+!msg
+**/__pycache__
