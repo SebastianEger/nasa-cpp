@@ -270,6 +270,10 @@ def main() -> None:
     fsv_values = {m["name"]: (m["payload"].get("min", 0) + m["payload"].get("max", 0)) / 2 if m["platform"] == "number"
                   else (m["payload"].get("options") or ["OFF"])[0] if m["platform"] == "select" else "OFF"
                   for m in messages if m["name"].startswith("FSV")}
+    # realistic heating water law (outdoor max/min point, WL1 and WL2 water temperatures)
+    for name, value in fsv_values.items():
+        code = name.split()[1]
+        fsv_values[name] = {"2011": -10, "2012": 15, "2021": 35, "2022": 25, "2031": 50, "2032": 35}.get(code, value)
     pump.t = time.time()
     try:
         while True:

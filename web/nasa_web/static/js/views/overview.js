@@ -3,7 +3,7 @@ import { lineChart, sparkline, timeline } from "../charts.js";
 import { bindControls, confirmState, widget } from "../controls.js";
 import { openEntity } from "../drawer.js";
 import { ago, energy, entityValue, esc, num, power } from "../format.js";
-import { N, ent, heatOutput, liveCop, store, text, val } from "../store.js";
+import { N, ent, heatOutput, liveCop, outletTarget, store, text, val } from "../store.js";
 
 const ICONS = {
   temp: `<svg viewBox="0 0 24 24"><path d="M14 14.8V5a2 2 0 1 0-4 0v9.8a4 4 0 1 0 4 0z"/></svg>`,
@@ -194,7 +194,7 @@ function flowSvg() {
     <!-- house -->
     <g class="target" id="f-house">
       <path d="M630,70 L720,16 L810,70 V160 H630Z" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-linejoin="round"/>
-      <text class="lbl" x="720" y="62" text-anchor="middle">Heating</text>
+      <text class="lbl" x="720" y="62" text-anchor="middle" id="f-heat-lbl">Heating</text>
       ${[1, 2].map((z) => `
       <g id="f-z${z}" data-entity="${id(z === 1 ? N.outlet1 : N.outlet2)}" style="cursor:pointer">
         <text class="lbl" x="644" y="${z === 1 ? 104 : 140}">Zone ${z}</text>
@@ -248,9 +248,11 @@ function renderFlow() {
   setText("#f-out", deg(val(N.waterOut)));
   setText("#f-in", deg(val(N.waterIn)));
   setText("#f-flow", `${num(flow, 1)} L/min`);
-  for (const [z, room, sw, target] of [[1, N.outlet1, N.zone1, N.outlet1Target], [2, N.outlet2, N.zone2, N.outlet2Target]]) {
+  const auto = text(N.mode) === "AUTO";
+  setText("#f-heat-lbl", auto ? "Heating · water law" : "Heating");
+  for (const [z, room, sw] of [[1, N.outlet1, N.zone1], [2, N.outlet2, N.zone2]]) {
     const on = text(sw) !== "OFF";
-    const t = val(target);
+    const t = outletTarget(z);
     setText(`#f-z${z}-v`, deg(val(room)));
     setText(`#f-z${z}-t`, !on ? "off" : t == null ? "" : `→ ${num(t, 1)}°`);
     svg.querySelector(`#f-z${z}`).style.opacity = !ent(room) ? "0" : on ? "1" : "0.45";
