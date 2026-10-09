@@ -252,7 +252,8 @@ svg { display: block; }
 .flow-svg.running .pipe { animation: flow 0.9s linear infinite; }
 .flow-svg .pipe.idle { opacity: 0.25; animation: none !important; }
 @keyframes flow { to { stroke-dashoffset: -16; } }
-.flow-svg .fan { transform-box: fill-box; transform-origin: center; }
+/* rotate around the hub (100,150 in SVG user units), not the blades' asymmetric bounding box */
+.flow-svg .fan { transform-box: view-box; transform-origin: 100px 150px; }
 .flow-svg.fan-on .fan { animation: spin var(--fan-speed, 1s) linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .flow-svg .tank-fill { transition: height .8s, y .8s; }
