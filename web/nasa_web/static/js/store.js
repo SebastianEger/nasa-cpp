@@ -17,8 +17,6 @@ export const N = {
   waterIn: "Temp Water In",
   lawTarget: "Temp Water Law Target",
   tank: "Temp DHW Tank",
-  room1: "Temp Zone 1",
-  room2: "Temp Zone 2",
   outlet1: "Temp Outlet Zone1",
   outlet2: "Temp Outlet Zone2",
   flow: "Flow Sensor",
@@ -43,6 +41,8 @@ export const N = {
   zone1Target: "Zone 1 Target",
   zone2: "Zone2",
   zone2Target: "Zone 2 Target",
+  outlet1Target: "Zone 1 Water Outlet Target",
+  outlet2Target: "Zone 2 Water Outlet Target",
 };
 
 export function ent(name) {

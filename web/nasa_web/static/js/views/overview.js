@@ -18,8 +18,8 @@ const KPIS = [
   { key: N.outdoor, label: "Outdoor", icon: "temp", cls: "cool", color: "--s1" },
   { key: N.waterOut, label: "Flow temp", icon: "flame", cls: "heat", color: "--s2" },
   { key: N.tank, label: "Hot water", icon: "drop", cls: "heat", color: "--s5" },
-  { key: N.room1, label: "Room zone 1", icon: "home", cls: "accent", color: "--s7" },
-  { key: N.room2, label: "Room zone 2", icon: "home", cls: "accent", color: "--s4" },
+  { key: N.outlet1, label: "Outlet zone 1", icon: "home", cls: "accent", color: "--s7" },
+  { key: N.outlet2, label: "Outlet zone 2", icon: "home", cls: "accent", color: "--s4" },
   { key: N.power, label: "Power", icon: "bolt", cls: "good", color: "--s3" },
 ];
 
@@ -80,8 +80,8 @@ export default {
         { label: "Flow out", color: "--s2", unit: "°C" },
         { label: "Return", color: "--s3", unit: "°C" },
         { label: "DHW tank", color: "--s5", unit: "°C" },
-        { label: "Room zone 1", color: "--s7", unit: "°C" },
-        { label: "Room zone 2", color: "--s4", unit: "°C" },
+        { label: "Outlet zone 1", color: "--s7", unit: "°C" },
+        { label: "Outlet zone 2", color: "--s4", unit: "°C" },
       ],
       unit: "°C",
       height: 250,
@@ -196,7 +196,7 @@ function flowSvg() {
       <path d="M630,70 L720,16 L810,70 V160 H630Z" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-linejoin="round"/>
       <text class="lbl" x="720" y="62" text-anchor="middle">Heating</text>
       ${[1, 2].map((z) => `
-      <g id="f-z${z}" data-entity="${id(z === 1 ? N.room1 : N.room2)}" style="cursor:pointer">
+      <g id="f-z${z}" data-entity="${id(z === 1 ? N.outlet1 : N.outlet2)}" style="cursor:pointer">
         <text class="lbl" x="644" y="${z === 1 ? 104 : 140}">Zone ${z}</text>
         <text class="val" x="748" y="${z === 1 ? 105 : 141}" text-anchor="end" style="font-size:17px" id="f-z${z}-v">–</text>
         <text class="val-sm" x="798" y="${z === 1 ? 105 : 141}" text-anchor="end" style="font-size:11px" id="f-z${z}-t"></text>
@@ -248,7 +248,7 @@ function renderFlow() {
   setText("#f-out", deg(val(N.waterOut)));
   setText("#f-in", deg(val(N.waterIn)));
   setText("#f-flow", `${num(flow, 1)} L/min`);
-  for (const [z, room, sw, target] of [[1, N.room1, N.zone1, N.zone1Target], [2, N.room2, N.zone2, N.zone2Target]]) {
+  for (const [z, room, sw, target] of [[1, N.outlet1, N.zone1, N.outlet1Target], [2, N.outlet2, N.zone2, N.outlet2Target]]) {
     const on = text(sw) !== "OFF";
     const t = val(target);
     setText(`#f-z${z}-v`, deg(val(room)));
@@ -369,7 +369,7 @@ function renderControls() {
 /* ----------------------------------------------------------------- history */
 
 async function loadHistory() {
-  const keys = [N.outdoor, N.waterOut, N.waterIn, N.tank, N.room1, N.room2];
+  const keys = [N.outdoor, N.waterOut, N.waterIn, N.tank, N.outlet1, N.outlet2];
   const states = [[N.valve, "3-way valve"], [N.opMode, "Compressor"], [N.zone1, "Zone 1"], [N.zone2, "Zone 2"], [N.defrost, "Defrost"]];
   const ids = [...new Set([...keys, N.power, ...states.map((x) => x[0])].map((k) => ent(k)?.id).filter(Boolean))];
   if (!ids.length) return;
