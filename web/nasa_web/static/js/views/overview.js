@@ -134,25 +134,25 @@ function flowSvg() {
     </defs>
 
     <!-- pipes background -->
-    <path class="pipe-bg" d="M226,110 H450"/>
+    <path class="pipe-bg" d="M276,110 H450"/>
     <path class="pipe-bg" d="M490,110 H630"/>
     <path class="pipe-bg" d="M470,130 V222 H690"/>
     <path class="pipe-bg" d="M630,140 H560 V250"/>
     <path class="pipe-bg" d="M690,280 H560 V250"/>
-    <path class="pipe-bg" d="M560,250 H226"/>
+    <path class="pipe-bg" d="M560,250 H276"/>
 
     <!-- animated pipes -->
-    <path class="pipe supply" id="p-main-s" d="M226,110 H450"/>
+    <path class="pipe supply" id="p-main-s" d="M276,110 H450"/>
     <path class="pipe supply" id="p-heat-s" d="M490,110 H630"/>
     <path class="pipe supply" id="p-tank-s" d="M470,130 V222 H690"/>
     <path class="pipe ret" id="p-heat-r" d="M630,140 H560 V250"/>
     <path class="pipe ret" id="p-tank-r" d="M690,280 H560 V250"/>
-    <path class="pipe ret" id="p-main-r" d="M560,250 H226"/>
+    <path class="pipe ret" id="p-main-r" d="M560,250 H276"/>
 
     <!-- outdoor unit -->
     <g data-entity="${id(N.freq)}" style="cursor:pointer">
-      <rect class="unit-box" x="26" y="40" width="200" height="240" rx="20"/>
-      <g opacity=".5">${[0, 1, 2, 3, 4, 5].map((i) => `<rect x="150" y="${70 + i * 10}" width="54" height="3" rx="1.5" fill="var(--border-strong)"/>`).join("")}</g>
+      <rect class="unit-box" x="26" y="40" width="250" height="240" rx="20"/>
+      <g opacity=".5">${[0, 1, 2, 3, 4, 5].map((i) => `<rect x="184" y="${70 + i * 10}" width="72" height="3" rx="1.5" fill="var(--border-strong)"/>`).join("")}</g>
       <circle cx="100" cy="150" r="58" fill="var(--surface)" stroke="var(--border-strong)"/>
       <g class="fan">
         ${[0, 72, 144, 216, 288].map((a) => `<path transform="rotate(${a} 100 150)" d="M100,150 C92,128 92,104 104,96 C114,104 112,128 100,150Z" fill="var(--cool)" opacity=".85"/>`).join("")}
@@ -160,8 +160,8 @@ function flowSvg() {
       </g>
       <text class="lbl" x="44" y="236">Compressor</text>
       <text class="val" x="44" y="262" id="f-freq">–</text>
-      <text class="lbl" x="150" y="236">Fan</text>
-      <text class="val-sm" x="150" y="260" id="f-fan">–</text>
+      <text class="lbl" x="184" y="236">Fan</text>
+      <text class="val-sm" x="184" y="260" id="f-fan">–</text>
     </g>
     <g data-entity="${id(N.outdoor)}" style="cursor:pointer">
       <text class="lbl" x="26" y="18">Outside</text>
@@ -170,16 +170,16 @@ function flowSvg() {
 
     <!-- labels on main pipes -->
     <g data-entity="${id(N.waterOut)}" style="cursor:pointer">
-      <text class="lbl" x="250" y="72">Flow out</text>
-      <text class="val" x="250" y="96" id="f-out">–</text>
+      <text class="lbl" x="300" y="72">Flow out</text>
+      <text class="val" x="300" y="96" id="f-out">–</text>
     </g>
     <g data-entity="${id(N.waterIn)}" style="cursor:pointer">
-      <text class="lbl" x="250" y="276">Return</text>
-      <text class="val" x="250" y="300" id="f-in">–</text>
+      <text class="lbl" x="300" y="276">Return</text>
+      <text class="val" x="300" y="300" id="f-in">–</text>
     </g>
     <g data-entity="${id(N.flow)}" style="cursor:pointer">
-      <text class="lbl" x="250" y="172">Flow rate</text>
-      <text class="val-sm" x="250" y="192" id="f-flow">–</text>
+      <text class="lbl" x="300" y="172">Flow rate</text>
+      <text class="val-sm" x="300" y="192" id="f-flow">–</text>
     </g>
 
     <!-- 3 way valve -->
