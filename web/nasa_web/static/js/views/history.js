@@ -7,7 +7,7 @@ const RANGES = [["1h", 3600], ["6h", 6 * 3600], ["24h", 86400], ["7d", 7 * 86400
 
 const PANELS = [
   { id: "temps", title: "Temperatures", unit: "°C", span: 12, height: 300,
-    series: [[N.outdoor, "Outdoor"], [N.waterOut, "Flow out"], [N.waterIn, "Return"], [N.tank, "DHW tank"], [N.room1, "Room zone 1"], [N.room2, "Room zone 2"], [N.lawTarget, "Water law target"]] },
+    series: [[N.outdoor, "Outdoor"], [N.waterOut, "Flow out"], [N.waterIn, "Return"], [N.tank, "DHW tank"], [N.outlet1, "Outlet zone 1"], [N.outlet2, "Outlet zone 2"], [N.lawTarget, "Water law target"]] },
   { id: "power", title: "Electrical power", unit: "W", span: 12, height: 220, series: [[N.power, "Power"]] },
   { id: "freq", title: "Compressor frequency", unit: "Hz", span: 6, height: 200, series: [[N.freq, "Frequency"]] },
   { id: "flow", title: "Water flow", unit: "L/min", span: 6, height: 200, series: [[N.flow, "Flow"]] },

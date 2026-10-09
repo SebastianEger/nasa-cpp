@@ -17,8 +17,6 @@ export const N = {
   waterIn: "Temp Water In",
   lawTarget: "Temp Water Law Target",
   tank: "Temp DHW Tank",
-  room1: "Temp Zone 1",
-  room2: "Temp Zone 2",
   outlet1: "Temp Outlet Zone1",
   outlet2: "Temp Outlet Zone2",
   flow: "Flow Sensor",
@@ -43,6 +41,8 @@ export const N = {
   zone1Target: "Zone 1 Target",
   zone2: "Zone2",
   zone2Target: "Zone 2 Target",
+  outlet1Target: "Zone 1 Water Outlet Target",
+  outlet2Target: "Zone 2 Water Outlet Target",
 };
 
 export function ent(name) {
@@ -57,6 +57,35 @@ export function val(name) {
 export function text(name) {
   const e = ent(name);
   return e ? (e.text ?? (e.value != null ? String(e.value) : null)) : null;
+}
+
+/** Value of a field setting by its code, e.g. fsv(2011). */
+export function fsv(code) {
+  const prefix = `fsv ${code} `;
+  for (const [name, e] of store.byName) if (name.startsWith(prefix)) return e.value;
+  return null;
+}
+
+/**
+ * Water outlet target from the heating water law (used when Mode is AUTO).
+ * Zone 1 uses WL1 (FSV 2021/2022), zone 2 uses WL2 (FSV 2031/2032). The target is
+ * interpolated linearly between the outdoor temperatures FSV 2011 (max point, cold)
+ * and FSV 2012 (min point, warm) and held constant outside that range.
+ */
+export function waterLawTarget(zone) {
+  const outdoor = val(N.outdoor);
+  const tCold = fsv(2011), tWarm = fsv(2012);
+  const wCold = fsv(zone === 1 ? 2021 : 2031), wWarm = fsv(zone === 1 ? 2022 : 2032);
+  if ([outdoor, tCold, tWarm, wCold, wWarm].some((v) => v == null)) return null;
+  if (outdoor <= tCold || tWarm <= tCold) return wCold;
+  if (outdoor >= tWarm) return wWarm;
+  return wCold + ((outdoor - tCold) / (tWarm - tCold)) * (wWarm - wCold);
+}
+
+/** Effective water outlet target of a zone: water law in AUTO mode, else the set target. */
+export function outletTarget(zone) {
+  if (text(N.mode) === "AUTO") return waterLawTarget(zone);
+  return val(zone === 1 ? N.outlet1Target : N.outlet2Target);
 }
 
 /** Thermal output in W from flow (L/min) and delta T. */
