@@ -1,12 +1,13 @@
 #pragma once
 
+#include <functional>
 #include <string>
 #include <mqtt/async_client.h>
 #include <spdlog/sinks/stdout_color_sinks-inl.h>
 
 namespace nasacpp
 {
-    class MqttClient;
+    class PahoMqttClient;
 
     class action_listener : public virtual mqtt::iaction_listener
     {
@@ -28,6 +29,7 @@ namespace nasacpp
         mqtt::connect_options &connOpts_;
 
         std::shared_ptr<spdlog::logger> logger_;
+        std::function<void()> on_connected_;
 
         void reconnect()
         {
@@ -54,6 +56,10 @@ namespace nasacpp
         void connected(const std::string &cause) override
         {
             logger_->info("MqttClient: Connected!");
+            if (on_connected_)
+            {
+                on_connected_();
+            }
         }
 
         void connection_lost(const std::string &cause) override
@@ -77,7 +83,7 @@ namespace nasacpp
         void delivery_complete(mqtt::delivery_token_ptr token) override {}
 
     public:
-        friend MqttClient;
+        friend PahoMqttClient;
 
         callback(mqtt::async_client &cli, mqtt::connect_options &connOpts, std::shared_ptr<spdlog::logger> logger)
             : cli_(cli), connOpts_(connOpts), logger_(logger)

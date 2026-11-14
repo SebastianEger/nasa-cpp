@@ -1,10 +1,11 @@
 #include "nasa_hass_bridge.h"
+#include <algorithm>
 #include <fstream>
 
 namespace nasacpp
 {
-    NasaHassBridge::NasaHassBridge(const Address &sa, const json &cfg)
-        : MqttClient(cfg["mqtt"]["address"], cfg["mqtt"]["port"], cfg["mqtt"]["client_id"]), sa_(sa)
+    NasaHassBridge::NasaHassBridge(MqttClient &mqtt, const Address &sa, const json &cfg)
+        : mqtt_(mqtt), sa_(sa)
     {
         NasaMqttHandler::disable_write_send = cfg["disable_write_send"];
         NasaMqttHandler::initial_read_out = cfg["initial_read_out"];
@@ -46,7 +47,7 @@ namespace nasacpp
         if (handler)
         {
             handler->updateValue(msg);
-            publish(handler->getTopic(), handler->getMqttPayload(), handler->getDataType() == DataType::Write || handler->getDataType() == DataType::Request);
+            mqtt_.publish(handler->getTopic(), handler->getMqttPayload(), handler->getDataType() == DataType::Write || handler->getDataType() == DataType::Request);
         }
     }
 
@@ -67,19 +68,26 @@ namespace nasacpp
     {
         while (!shutdown_)
         {
-            auto recv_msgs = MqttClient::getData();
+            auto recv_msgs = mqtt_.getData();
             for (auto &msg : recv_msgs)
             {
                 std::lock_guard<std::mutex> lock(mtx_handler_);
-                auto &handler = topic_handler_[msg->get_topic()];
-                if (handler)
+                auto it = topic_handler_.find(msg.topic);
+                if (it != topic_handler_.end() && it->second)
                 {
-                    handler->updateValueNew(msg->get_payload());
-                    handler->resetRetryCounter();
+                    try
+                    {
+                        it->second->updateValueNew(msg.payload);
+                        it->second->resetRetryCounter();
+                    }
+                    catch (const std::exception &e)
+                    {
+                        logger_->warn("Invalid payload '{}' on {}: {}", msg.payload, msg.topic, e.what());
+                    }
                 }
                 else
                 {
-                    logger_->warn("NasMqttClient: No handler for {}", msg->get_topic());
+                    logger_->warn("No handler for {}", msg.topic);
                 }
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -150,15 +158,12 @@ namespace nasacpp
         }
 
         // create and publish config message
-        mqtt::message_ptr pubmsg = mqtt::make_message(topic_config, payload.dump());
-        pubmsg->set_retained(true);
-        pubmsg->set_qos(qos_);
-        cli_->publish(pubmsg, nullptr, pub_listener_)->wait_for(timeout_);
+        mqtt_.publish(topic_config, payload.dump(), true);
 
         // init command topic callback
         if (payload.contains("command_topic"))
         {
-            subscribe(topic_set);
+            mqtt_.subscribe(topic_set);
             topic_handler_[topic_set] = msgnr_handler_[msg_nr];
         }
 
@@ -168,22 +173,26 @@ namespace nasacpp
 
     void NasaHassBridge::loadMsgList(const std::string &filename, const DataType &data_type)
     {
-        // check if file exists
-        if (!std::filesystem::exists(filename))
+        // check if file exists and is not empty
+        std::ifstream f(filename, std::ios::binary | std::ios::ate);
+        if (!f.is_open())
         {
+            logger_->error("Could not open message list {}", filename);
             return;
         }
-
-        // check if file is not empty
-        std::ifstream f(filename, std::ios::binary | std::ios::ate);
-        if (f.tellg())
+        if (f.tellg() > 0)
         {
             f = std::ifstream(filename);
-            json msg_list = json::parse(f);
-            for (auto &msg_cfg : msg_list)
-            {
-                addMsg(msg_cfg, data_type);
-            }
+            // stream the list: every entry is handled as soon as it is parsed and then discarded,
+            // so the whole document never has to fit into memory (important on the ESP32)
+            json::parse(f, [&](int depth, json::parse_event_t event, json &parsed)
+                        {
+                            if (event == json::parse_event_t::object_end && depth == 1)
+                            {
+                                addMsg(parsed, data_type);
+                                return false;
+                            }
+                            return true; });
         }
     }
 

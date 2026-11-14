@@ -13,7 +13,7 @@ namespace nasacpp
     {
     public:
         NasaMqttHandler(const std::string &topic, const MessageNumber &message_number, const Address &sa, const DataType &data_type = DataType::Read)
-            : topic_(topic), NasaMsgHandler(message_number, sa, data_type) {}
+            : NasaMsgHandler(message_number, sa, data_type), topic_(topic) {}
 
         const std::string &getTopic() const
         {

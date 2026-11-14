@@ -1,18 +1,21 @@
 #pragma once
-#include "mqtt_client.h"
+#include "mqtt_interface.h"
 #include "nasa_mqtt_handler.hpp"
 
-#include <set>
+#include <map>
+#include <memory>
+#include <mutex>
+#include <thread>
 #include <spdlog/sinks/stdout_color_sinks-inl.h>
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
 namespace nasacpp
 {
-    class NasaHassBridge : public MqttClient
+    class NasaHassBridge
     {
     public:
-        NasaHassBridge(const Address &sa, const json &cfg);
+        NasaHassBridge(MqttClient &mqtt, const Address &sa, const json &cfg);
         ~NasaHassBridge();
 
     public:
@@ -21,6 +24,9 @@ namespace nasacpp
         void loadMsgListRead(const std::string &filename);
         void loadMsgListRequest(const std::string &filename);
         void loadMsgListWrite(const std::string &filename);
+
+        // NASA source address used for packets sent by the bridge
+        const Address &address() const { return sa_; }
 
     private:
         void addMsg(const json &cfg, const DataType &data_type);
@@ -34,11 +40,13 @@ namespace nasacpp
         void loop();
 
     protected:
+        MqttClient &mqtt_;
+
         std::mutex mtx_handler_;
         std::map<uint16_t, std::shared_ptr<NasaMqttHandler>> msgnr_handler_;
         std::map<std::string, std::shared_ptr<NasaMqttHandler>> topic_handler_;
 
-        bool shutdown_ = false;
+        std::atomic_bool shutdown_ = false;
         std::thread loop_thread_;
 
         // NASA source address

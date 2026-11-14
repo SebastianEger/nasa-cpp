@@ -1,11 +1,11 @@
-#include <mqtt_client.h>
+#include <paho_mqtt_client.h>
 
 int main(int argc, char **argv)
 {
     // init logger
     std::shared_ptr<spdlog::logger> logger = spdlog::stdout_color_st("Main");
 
-    nasacpp::MqttClient mqtt_client("localhost", 1883);
+    nasacpp::PahoMqttClient mqtt_client("localhost", 1883);
     mqtt_client.subscribe("nasacpp/test");
     mqtt_client.subscribe("nasacpp/topic");
     while (true)

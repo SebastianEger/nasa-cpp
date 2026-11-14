@@ -1,0 +1,34 @@
+{
+    "wifi": {
+        "ssid": "your-wifi",
+        "password": "your-password",
+        "hostname": "nasa-cpp"
+    },
+    "mqtt": {
+        "address": "192.168.178.10",
+        "port": 1883,
+        "client_id": "nasa_cpp_atom",
+        "username": "",
+        "password": ""
+    },
+    "transport": "uart",
+    "uart": {
+        "tx_pin": 22,
+        "rx_pin": 19,
+        "de_pin": -1,
+        "baud_rate": 9600
+    },
+    "tcp": {
+        "address": "192.168.178.25",
+        "port": 26
+    },
+    "led_pin": 27,
+    "read_msg_list": "/spiffs/sensor_msg_list.json",
+    "request_msg_list": "/spiffs/control_msg_list.json",
+    "write_msg_list": "/spiffs/fsv_msg_list.json",
+    "read_only": false,
+    "disable_write_send": true,
+    "initial_read_out": true,
+    "timeout": 30,
+    "buffer_limit": 4096
+}

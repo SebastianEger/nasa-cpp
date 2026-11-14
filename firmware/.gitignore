@@ -1,0 +1,8 @@
+# local configuration with Wi-Fi and MQTT credentials
+config.json
+build/
+build-*/
+sdkconfig
+sdkconfig.old
+managed_components/
+dependencies.lock

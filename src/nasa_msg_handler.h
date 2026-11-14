@@ -2,6 +2,10 @@
 
 #include "nasa_protocol_types.hpp"
 
+#include <atomic>
+#include <climits>
+#include <memory>
+
 #include <spdlog/sinks/stdout_color_sinks-inl.h>
 
 namespace nasacpp

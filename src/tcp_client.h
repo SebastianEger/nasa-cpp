@@ -1,5 +1,8 @@
 #pragma once
 
+#include "byte_transport.h"
+
+#include <atomic>
 #include <string>
 #include <thread>
 #include <mutex>
@@ -9,7 +12,7 @@
 
 namespace nasacpp
 {
-    class TcpClient
+    class TcpClient : public ByteTransport
     {
     public:
         TcpClient(const std::string &address, int port);
@@ -28,8 +31,13 @@ namespace nasacpp
         std::vector<uint8_t> getRecvData();
         int send(const std::vector<uint8_t> &data);
 
-        bool connected();
         void forceReconnect();
+
+        // ByteTransport
+        int read(std::deque<uint8_t> &data) override { return getRecvData(data); }
+        int write(const std::vector<uint8_t> &data) override { return send(data); }
+        bool connected() override;
+        void reconnect() override { forceReconnect(); }
 
     private:
         bool connect2server();
@@ -46,7 +54,7 @@ namespace nasacpp
         std::string address_;
         int port_;
         std::mutex mtx_socket_;
-        int socket_;
+        int socket_ = -1;
 
         // buffer
         std::mutex mtx_recv_data_;

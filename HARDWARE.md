@@ -16,9 +16,16 @@ wiring, the RS485 adapter settings and how to verify the connection.
 
 ## Overview
 
-Samsung heat pumps communicate over a two-wire RS485 bus using the NASA protocol. nasa-cpp does not
-access the bus directly. Instead, it connects over TCP to a serial device server (RS485-to-Ethernet or
-RS485-to-Wi-Fi adapter), which forwards the raw bus traffic in both directions.
+Samsung heat pumps communicate over a two-wire RS485 bus using the NASA protocol. There are two ways
+to connect nasa-cpp to the bus:
+
+1. **Linux host + RS485/TCP adapter** (this guide): nasa-cpp runs on a Linux machine and connects
+   over TCP to a serial device server (RS485-to-Ethernet or RS485-to-Wi-Fi adapter), which forwards
+   the raw bus traffic in both directions.
+2. **ESP32 + RS485 base**: the nasa-cpp firmware runs on an M5Stack Atom Lite with the Atomic RS485
+   Base, which is wired to the bus directly and connects to MQTT over Wi-Fi. No adapter and no Linux
+   host are needed. The safety notes and cabling notes below apply as well; for the board-specific
+   wiring and setup see [firmware/README.md](firmware/README.md).
 
 ```
 ┌──────────────┐   RS485 (F1/F2)   ┌─────────────────┐   TCP (e.g. port 26)   ┌──────────────┐
@@ -28,8 +35,8 @@ RS485-to-Wi-Fi adapter), which forwards the raw bus traffic in both directions.
 └──────────────┘                   └─────────────────┘                        └──────────────┘
 ```
 
-The adapter can be powered from the heat pump's 12 V supply terminals, so no extra power supply is
-needed in most installations.
+The adapter, or the ESP32 with its RS485 base, can be powered from the heat pump's 12 V supply
+terminals, so no extra power supply is needed in most installations.
 
 ## Safety
 

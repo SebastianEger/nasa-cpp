@@ -3,11 +3,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![C++20](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
 [![Platform: Linux](https://img.shields.io/badge/Platform-Linux-green.svg)](https://www.linux.org/)
+[![Platform: ESP32](https://img.shields.io/badge/Platform-ESP32-green.svg)](firmware/README.md)
 
 A C++20 implementation of the Samsung NASA protocol for monitoring and controlling Samsung EHS
-heat pumps. nasa-cpp talks to the heat pump's RS485 bus through a network serial adapter and
-publishes its data to MQTT, with Home Assistant discovery. A standalone web dashboard with long-term
-history is included as well.
+heat pumps. nasa-cpp talks to the heat pump's RS485 bus and publishes its data to MQTT, with Home
+Assistant discovery. It runs on Linux with a network serial adapter, or as firmware directly on an
+ESP32 such as the M5Stack Atom Lite. A standalone web dashboard with long-term history is included as
+well.
 
 ![nasa-web dashboard](res/web-dashboard.png)
 
@@ -29,8 +31,9 @@ history is included as well.
 ## Overview
 
 ```
-Samsung heat pump ─ RS485 (NASA bus) ─ RS485/TCP adapter ─ LAN ─ nasa-cpp ─ MQTT broker ─┬─ Home Assistant
-                                                                                       └─ nasa-web dashboard
+Linux:  Samsung heat pump ─ RS485 (NASA bus) ─ RS485/TCP adapter ─ LAN ─ nasa-cpp ─┐
+                                                                                   ├─ MQTT broker ─┬─ Home Assistant
+ESP32:  Samsung heat pump ─ RS485 (NASA bus) ─ ESP32 with nasa-cpp firmware ─ Wi-Fi ┘               └─ nasa-web dashboard
 ```
 
 - **Protocol library**: encoding and decoding of NASA packets and messages (`src/`).
@@ -42,6 +45,8 @@ Samsung heat pump ─ RS485 (NASA bus) ─ RS485/TCP adapter ─ LAN ─ nasa-cp
   values (FSV).
 - **Docker images** for `linux/amd64` and `linux/arm64`, published to
   `ghcr.io/sebastianeger/nasa-cpp`.
+- **ESP32 firmware**: the same bridge as a standalone device, connected to the bus through an
+  RS485 base and to MQTT over Wi-Fi.
 
 ## Applications
 
@@ -51,6 +56,7 @@ Samsung heat pump ─ RS485 (NASA bus) ─ RS485/TCP adapter ─ LAN ─ nasa-cp
 | `tcp_fsv_list` | Reads all field setting values (FSV) once and exports them to CSV | [APPS.md](APPS.md#2-tcp_fsv_list) |
 | `tcp_nasa_logger` | Logs all decoded NASA packets to a file, for analysis and debugging | [APPS.md](APPS.md#3-tcp_nasa_logger) |
 | `nasa-web` | Standalone web dashboard with history, energy statistics and controls | [web/README.md](web/README.md) |
+| ESP32 firmware | `tcp_hass_bridge` as firmware for an ESP32 (M5Stack Atom Lite) with an RS485 base | [firmware/README.md](firmware/README.md) |
 
 ## Supported devices
 
@@ -59,10 +65,18 @@ on a Samsung EHS Mono HQ Quiet (`AE08BXYDGG`). Other heat pumps that use the NAS
 to work, but supported message numbers, value ranges and options can differ between models. Check the
 values before you enable any write access.
 
-A network-attached RS485 adapter is required. See [HARDWARE.md](HARDWARE.md) for supported adapters,
-wiring and adapter settings.
+Two hardware setups are supported:
+
+- **Linux host + RS485/TCP adapter**: the applications run on any Linux machine and reach the bus
+  through a network serial adapter.
+- **ESP32 + RS485 base**: an M5Stack Atom Lite with the Atomic RS485 Base runs the MQTT bridge as
+  firmware and can be powered from the heat pump. See [firmware/README.md](firmware/README.md).
+
+See [HARDWARE.md](HARDWARE.md) for supported hardware, wiring and adapter settings.
 
 ## Getting started
+
+These steps describe the Linux setup. For the ESP32, follow [firmware/README.md](firmware/README.md).
 
 ### 1. Connect the hardware
 
@@ -192,10 +206,16 @@ Tests and samples are only built with `BUILD_SHARED_LIBS=ON`. To run the tests:
 ctest --test-dir build --output-on-failure
 ```
 
+### ESP32 firmware
+
+The firmware is an ESP-IDF project in `firmware/` and is built with ESP-IDF v5.5, for example with
+the `espressif/idf` Docker image. See [firmware/README.md](firmware/README.md#building).
+
 ## Repository layout
 
 ```
 apps/        applications (tcp_hass_bridge, tcp_fsv_list, tcp_nasa_logger)
+firmware/    ESP32 firmware (ESP-IDF project, uses the library in src/)
 src/         NASA protocol library, TCP and MQTT clients, Home Assistant bridge
 msg/         message lists per heat pump model
 cfg/         application configuration files
@@ -209,6 +229,7 @@ res/         Home Assistant examples and screenshots (see res/README.md)
 
 - [APPS.md](APPS.md): applications and all configuration options
 - [HARDWARE.md](HARDWARE.md): RS485 adapter, wiring and adapter settings
+- [firmware/README.md](firmware/README.md): ESP32 firmware, wiring, configuration and flashing
 - [web/README.md](web/README.md): web dashboard, deployment and API
 - [res/README.md](res/README.md): Home Assistant dashboard and sensor examples
 - [NASA protocol wiki](https://wiki.myehs.eu/wiki/NASA_Protocol): protocol background and message numbers

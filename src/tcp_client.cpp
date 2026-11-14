@@ -1,6 +1,8 @@
 #include "tcp_client.h"
 
 #include <arpa/inet.h>
+#include <cerrno>
+#include <fcntl.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <unistd.h>
@@ -28,7 +30,10 @@ namespace nasacpp
 
     bool TcpClient::connect2server()
     {
-        close(socket_);
+        if (socket_ >= 0)
+        {
+            close(socket_);
+        }
         socket_ = socket(AF_INET, SOCK_STREAM, 0);
 
         sockaddr_in serv_addr;
@@ -98,7 +103,14 @@ namespace nasacpp
                     }
                 }
 
-                if (n_read)
+                if (n_read == 0 || (n_read < 0 && errno != EAGAIN && errno != EWOULDBLOCK))
+                {
+                    logger_->warn("Connection closed");
+                    connected_ = false;
+                    break;
+                }
+
+                if (n_read > 0)
                 {
                     std::lock_guard<std::mutex> lock(mtx_recv_data_);
                     for (int i = 0; i < n_read; ++i)

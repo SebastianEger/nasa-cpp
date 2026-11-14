@@ -10,6 +10,7 @@ for the hardware setup.
 2. [`tcp_fsv_list`](#2-tcp_fsv_list): field setting export
 3. [`tcp_nasa_logger`](#3-tcp_nasa_logger): packet logger
 4. [`nasa-web`](#4-nasa-web): web dashboard
+5. [ESP32 firmware](#5-esp32-firmware): `tcp_hass_bridge` on an ESP32
 
 ## Common behavior
 
@@ -115,9 +116,18 @@ The log file grows continuously; stop the logger once you have captured enough d
 ## 4. `nasa-web`
 
 A standalone web dashboard with live values, history, energy statistics, controls and FSV overview.
-It uses the MQTT topics published by `tcp_hass_bridge`, so the bridge must be running. Deployment,
+It uses the MQTT topics published by `tcp_hass_bridge` (or the ESP32 firmware), so the bridge must be
+running. Deployment,
 configuration and the HTTP API are documented in [web/README.md](web/README.md).
 
 ```bash
 docker compose up -d nasa-web      # http://<host>:8080
 ```
+
+## 5. ESP32 firmware
+
+The MQTT bridge `tcp_hass_bridge` is also available as firmware for an ESP32, e.g. an M5Stack Atom
+Lite with the Atomic RS485 Base. It uses the same library, message lists and options, and publishes
+the same MQTT topics. Instead of a file in `cfg/`, its configuration (including Wi-Fi and the bus
+connection) is stored on the device. Setup, wiring, building and flashing are documented in
+[firmware/README.md](firmware/README.md).

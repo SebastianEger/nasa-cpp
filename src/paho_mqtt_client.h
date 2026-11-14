@@ -1,0 +1,39 @@
+#pragma once
+
+#include "mqtt_interface.h"
+#include "paho_mqtt_client_helper.hpp"
+
+#include <spdlog/sinks/stdout_color_sinks-inl.h>
+
+namespace nasacpp
+{
+    // MqttClient implementation based on the Eclipse Paho MQTT C++ library (Linux).
+    class PahoMqttClient : public MqttClient
+    {
+    public:
+        PahoMqttClient(const std::string &address = "localhost", const int port = 1883, const std::string &client_id = std::string{"nasa_ha_mqtt_client"});
+
+        void publish(const std::string &topic, const std::string &payload, bool retained = false) override;
+        void subscribe(const std::string &topic) override;
+
+        std::vector<MqttMessage> getData() override;
+
+    protected:
+        mqtt::async_client::ptr_t cli_;
+        mqtt::connect_options conn_options_;
+        std::unique_ptr<callback> cb_;
+        std::chrono::seconds timeout_ = std::chrono::seconds(10);
+
+        action_listener sub_listener_;
+        action_listener pub_listener_;
+
+        int qos_ = 1;
+
+        // subscriptions are repeated after every (re)connect
+        std::mutex mtx_topics_;
+        std::vector<std::string> topics_;
+        void resubscribe();
+
+        std::shared_ptr<spdlog::logger> logger_ = spdlog::stdout_color_mt("MqttClient");
+    };
+} // namespace nasacpp
