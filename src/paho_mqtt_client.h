@@ -8,6 +8,7 @@
 namespace nasacpp
 {
     // MqttClient implementation based on the Eclipse Paho MQTT C++ library (Linux).
+    // Subscriptions are repeated after every (re)connect.
     class PahoMqttClient : public MqttClient
     {
     public:

@@ -1,3 +1,5 @@
+// Unit tests for the NASA packet encoding and decoding.
+
 #include <gtest/gtest.h>
 #include "../src/nasa_protocol.h"
 

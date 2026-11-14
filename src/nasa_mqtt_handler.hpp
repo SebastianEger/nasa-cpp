@@ -9,6 +9,7 @@ using json = nlohmann::json;
 
 namespace nasacpp
 {
+    // NasaMsgHandler with an MQTT state topic; numeric values are published and received as numbers.
     class NasaMqttHandler : public NasaMsgHandler
     {
     public:
@@ -48,6 +49,7 @@ namespace nasacpp
         const std::string topic_;
     };
 
+    // Handler for Home Assistant selects and enum sensors: maps option names to raw values.
     class NasaMqttHandlerEnum : public NasaMqttHandler
     {
     public:
@@ -108,6 +110,7 @@ namespace nasacpp
         std::unordered_map<std::string, int> str_i_;
     };
 
+    // Handler for Home Assistant switches and binary sensors: ON/OFF payloads.
     class NasaMqttHandlerBinary : public NasaMqttHandler
     {
     public:

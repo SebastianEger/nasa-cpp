@@ -1,3 +1,5 @@
+// Sample: logs the amount of data received from an RS485/TCP adapter and reconnects after 10 s without data.
+
 #include <tcp_client.h>
 #include <spdlog/spdlog.h>
 
@@ -5,11 +7,11 @@ int main(int argc, char **argv)
 {
     // init logger
     std::shared_ptr<spdlog::logger> logger = spdlog::stdout_color_st("Main");
-    
+
     // init tcp client
     nasacpp::TcpClient tcp_client("192.168.178.25", 26);
 
-    // start
+    // loop
     std::chrono::time_point<std::chrono::system_clock> tp_last_data = std::chrono::system_clock::now();
     while (true)
     {

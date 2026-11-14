@@ -96,7 +96,6 @@ namespace nasacpp
 
     void NasaHassBridge::addMsg(const json &cfg, const DataType &data_type)
     {
-        // name
         std::string name = cfg["name"]; // entity name
 
         // get message number
@@ -132,7 +131,7 @@ namespace nasacpp
         auto handler = createHandler(type, topic_state, (MessageNumber)msg_nr, sa_, data_type, device_class);
         if (handler && !msgnr_handler_.contains(msg_nr))
         {
-            // init payload with hanlder initialization
+            // init payload with handler initialization
             payload = handler->init(cfg_hass);
 
             // update maps
@@ -167,7 +166,6 @@ namespace nasacpp
             topic_handler_[topic_set] = msgnr_handler_[msg_nr];
         }
 
-        // finished!
         logger_->info("Add topic {}", topic_config);
     }
 

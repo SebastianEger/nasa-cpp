@@ -1,3 +1,5 @@
+// tcp_nasa_logger: logs all decoded NASA packets to /var/nasa-cpp/logs/nasa_log.txt.
+
 #include <tcp_client.h>
 #include <nasa_protocol.h>
 #include <nasa_hass_bridge.h>
@@ -33,8 +35,8 @@ int main(int argc, char **argv)
     {
         buffer_limit = config_main["buffer_limit"];
     }
-    
-    // init NASA to Home Assistant bridge
+
+    // NASA source address of this application
     Address sa;
     sa.a_class = AddressClass::JIGTester;
     sa.channel = 0x00;
@@ -50,7 +52,7 @@ int main(int argc, char **argv)
     std::chrono::time_point<std::chrono::system_clock> tp_last_data = std::chrono::system_clock::now();
     while (true)
     {
-        if(buffer.size() > buffer_limit)
+        if (buffer.size() > buffer_limit)
         {
             logger->warn("Buffer limit reached, clear buffer");
             buffer.clear();
@@ -64,7 +66,7 @@ int main(int argc, char **argv)
             tp_last_data = std::chrono::system_clock::now();
         }
 
-        // decode packets and publish to mqtt
+        // decode packets and log them
         auto pkts_rx = NasaProtocol::decode(buffer);
         if (!pkts_rx.empty())
         {

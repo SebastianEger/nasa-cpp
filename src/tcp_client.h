@@ -12,6 +12,8 @@
 
 namespace nasacpp
 {
+    // TCP connection to an RS485/TCP adapter. Receives on a background thread and reconnects
+    // automatically.
     class TcpClient : public ByteTransport
     {
     public:
@@ -33,7 +35,7 @@ namespace nasacpp
 
         void forceReconnect();
 
-        // ByteTransport
+        // ByteTransport interface
         int read(std::deque<uint8_t> &data) override { return getRecvData(data); }
         int write(const std::vector<uint8_t> &data) override { return send(data); }
         bool connected() override;

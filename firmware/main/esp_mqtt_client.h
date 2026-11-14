@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-#include <mqtt_client.h> // ESP-IDF esp-mqtt
+#include <mqtt_client.h> // esp-mqtt
 #include <nlohmann/json.hpp>
 
 namespace nasacpp
@@ -19,7 +19,7 @@ namespace nasacpp
     class EspMqttClient : public MqttClient
     {
     public:
-        // cfg: {"address", "port", "client_id", "username", "password"}
+        // Configuration keys: address, port, client_id, username, password.
         explicit EspMqttClient(const nlohmann::json &cfg);
         ~EspMqttClient() override;
 

@@ -1,3 +1,5 @@
+// Sample: subscribes to and publishes test topics with the Paho MQTT client.
+
 #include <paho_mqtt_client.h>
 
 int main(int argc, char **argv)

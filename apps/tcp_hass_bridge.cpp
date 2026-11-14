@@ -1,3 +1,5 @@
+// tcp_hass_bridge: bridges the NASA bus (through an RS485/TCP adapter) to MQTT with Home Assistant discovery.
+
 #include <tcp_client.h>
 #include <paho_mqtt_client.h>
 #include <nasa_hass_bridge.h>

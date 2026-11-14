@@ -12,6 +12,8 @@ using json = nlohmann::json;
 
 namespace nasacpp
 {
+    // Creates a Home Assistant MQTT entity for every entry of the message lists, publishes the
+    // values received from the bus and forwards commands from MQTT to the message handlers.
     class NasaHassBridge
     {
     public:
@@ -25,7 +27,7 @@ namespace nasacpp
         void loadMsgListRequest(const std::string &filename);
         void loadMsgListWrite(const std::string &filename);
 
-        // NASA source address used for packets sent by the bridge
+        // NASA source address used for packets sent by the bridge.
         const Address &address() const { return sa_; }
 
     private:
@@ -52,7 +54,7 @@ namespace nasacpp
         // NASA source address
         Address sa_;
 
-        // Device name
+        // device name
         std::string device_name_;
 
         std::shared_ptr<spdlog::logger> logger_ = spdlog::stdout_color_st("NasaHassBridge");

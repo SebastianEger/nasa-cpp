@@ -1,3 +1,5 @@
+// tcp_fsv_list: reads all field setting values (FSV) once and writes them to fsv_list.csv.
+
 #include <tcp_client.h>
 #include <nasa_protocol.h>
 #include <nasa_msg_handler.h>
@@ -39,7 +41,7 @@ int main(int argc, char **argv)
     std::ifstream f(config_filename);
     json config_main = json::parse(f);
 
-    // init NASA to Home Assistant bridge
+    // NASA source address of this application
     Address sa;
     sa.a_class = AddressClass::JIGTester;
     sa.channel = 0x00;
@@ -86,7 +88,7 @@ int main(int argc, char **argv)
             logger->info("[RECV] {} bytes", n_new_bytes);
         }
 
-        // decode packets and publish to mqtt
+        // decode packets and store the received values
         auto pkts_rx = NasaProtocol::decode(buffer);
         if (!pkts_rx.empty())
         {
@@ -103,7 +105,7 @@ int main(int argc, char **argv)
             }
         }
 
-        // progress tx
+        // request values that are still missing
         have_all_values = true;
         std::vector<Packet> pkts_tx;
         for (auto &msg_handler : msg_handlers)

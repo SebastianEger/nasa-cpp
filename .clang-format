@@ -1,0 +1,14 @@
+# Code style of nasa-cpp (the "Visual Studio" style of VS Code's C/C++ extension).
+# Format all sources with: clang-format -i src/* apps/*.cpp samples/*.cpp test/*.cpp firmware/main/*.cpp firmware/main/*.h
+BasedOnStyle: LLVM
+UseTab: Never
+IndentWidth: 4
+TabWidth: 4
+BreakBeforeBraces: Allman
+AllowShortIfStatementsOnASingleLine: false
+IndentCaseLabels: false
+ColumnLimit: 0
+AccessModifierOffset: -4
+NamespaceIndentation: All
+FixNamespaceComments: true
+SortIncludes: false

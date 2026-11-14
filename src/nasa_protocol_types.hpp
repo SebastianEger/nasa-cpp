@@ -356,6 +356,7 @@ namespace nasacpp
         CrcError = 5
     };
 
+    // Address of a device on the NASA bus: class, channel and address.
     struct Address
     {
         AddressClass a_class;
@@ -372,6 +373,7 @@ namespace nasacpp
         uint32_t to_uint32_t() const;
     };
 
+    // Command field of a packet: protocol flags, packet and data type, packet number.
     struct Command
     {
         bool packet_information = true;
@@ -387,6 +389,7 @@ namespace nasacpp
         void encode(std::vector<uint8_t> &data) const;
     };
 
+    // One message of a packet: message number and value (or raw structure data).
     struct MessageSet
     {
         struct Buffer
@@ -411,6 +414,7 @@ namespace nasacpp
         void encode(std::vector<uint8_t> &data) const;
     };
 
+    // NASA packet: source and destination address, command and messages.
     struct Packet
     {
         Address sa;

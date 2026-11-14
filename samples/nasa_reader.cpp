@@ -1,3 +1,5 @@
+// Sample: prints all NASA packets received from an RS485/TCP adapter.
+
 #include <tcp_client.h>
 #include <nasa_protocol.h>
 

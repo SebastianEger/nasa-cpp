@@ -13,7 +13,7 @@ namespace nasacpp
     class UartTransport : public ByteTransport
     {
     public:
-        // cfg: {"tx_pin", "rx_pin", "de_pin" (-1 = automatic direction), "baud_rate"}
+        // Configuration keys: tx_pin, rx_pin, de_pin (-1 = automatic direction control), baud_rate.
         explicit UartTransport(const nlohmann::json &cfg, uart_port_t port = UART_NUM_1);
         ~UartTransport() override;
 

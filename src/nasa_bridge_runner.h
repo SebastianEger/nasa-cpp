@@ -9,13 +9,14 @@
 
 namespace nasacpp
 {
+    // Options of BridgeRunner, read from the application configuration.
     struct BridgeOptions
     {
-        // seconds without received data before the transport is reconnected
+        // Seconds without received data before the transport is reconnected.
         int timeout = 30;
-        // receive buffer size in bytes; the buffer is cleared when it is exceeded
+        // Receive buffer size in bytes; the buffer is cleared when it is exceeded.
         size_t buffer_limit = 10000;
-        // never send anything to the heat pump
+        // Never send anything to the heat pump.
         bool read_only = false;
 
         static BridgeOptions fromConfig(const json &cfg);
@@ -28,16 +29,16 @@ namespace nasacpp
     public:
         BridgeRunner(ByteTransport &transport, NasaHassBridge &bridge, const BridgeOptions &options);
 
-        // one iteration: read, decode, publish, send pending commands, check timeout
+        // Runs one iteration: read, decode, publish, send pending commands and check the timeout.
         void step();
 
-        // calls step() forever
+        // Calls step() forever.
         [[noreturn]] void run(std::chrono::milliseconds period = std::chrono::milliseconds(200));
 
-        // statistics, e.g. for a status LED
+        // Statistics, e.g. for a status LED.
         uint32_t packetsReceived() const { return packets_rx_; }
         uint32_t packetsSent() const { return packets_tx_; }
-        // milliseconds since the last byte was received
+        // Milliseconds since the last byte was received.
         int64_t msSinceLastData() const;
 
     private:

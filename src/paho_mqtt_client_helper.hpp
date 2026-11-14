@@ -9,6 +9,7 @@ namespace nasacpp
 {
     class PahoMqttClient;
 
+    // Paho listener for subscribe and publish tokens (results are not used).
     class action_listener : public virtual mqtt::iaction_listener
     {
         std::string name;
@@ -20,6 +21,7 @@ namespace nasacpp
         action_listener(const std::string &name) : name(name) {}
     };
 
+    // Paho callback: collects received messages and reconnects after a connection loss.
     class callback : public virtual mqtt::callback, public virtual mqtt::iaction_listener
     {
         std::mutex mtx_data;

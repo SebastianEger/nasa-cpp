@@ -83,7 +83,7 @@ extern "C" void app_main(void)
     if (!mountStorage() || !loadConfig(cfg))
     {
         StatusLed led(kDefaultLedPin);
-        fail(led, "Could not read " "/spiffs/config.json" ". Flash the storage partition (see firmware/README.md).");
+        fail(led, "Could not read /spiffs/config.json. Flash the storage partition (see firmware/README.md).");
     }
     StatusLed led(cfg.value("led_pin", kDefaultLedPin));
     logHeap("config loaded");

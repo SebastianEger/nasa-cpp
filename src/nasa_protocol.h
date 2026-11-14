@@ -11,6 +11,8 @@
 
 namespace nasacpp
 {
+    // Encodes and decodes NASA packets. An instance additionally decodes the data passed to
+    // insertDataRx() on a background thread.
     class NasaProtocol
     {
     public:

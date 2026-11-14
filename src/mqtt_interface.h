@@ -5,6 +5,7 @@
 
 namespace nasacpp
 {
+    // A received MQTT message.
     struct MqttMessage
     {
         std::string topic;
@@ -21,7 +22,7 @@ namespace nasacpp
         virtual void publish(const std::string &topic, const std::string &payload, bool retained = false) = 0;
         virtual void subscribe(const std::string &topic) = 0;
 
-        // returns and clears all messages received since the last call
+        // Returns and clears all messages received since the last call.
         virtual std::vector<MqttMessage> getData() = 0;
     };
 } // namespace nasacpp

@@ -1,12 +1,13 @@
 #pragma once
 
+// Code from https://github.com/omerfaruk-aran/esphome_samsung_hvac_bus
+
 #include <stdint.h>
 #include <string>
 
-// Code from https://github.com/omerfaruk-aran/esphome_samsung_hvac_bus
-
 namespace nasacpp
 {
+    // CRC-16/XMODEM over length bytes of data, starting at startIndex.
     template <template <typename> typename Container>
     uint16_t crc16(const Container<uint8_t> &data, int startIndex, int length)
     {
@@ -30,9 +31,11 @@ namespace nasacpp
         return crc;
     }
 
+    // Hex representation, specialized for numbers, message numbers and byte vectors.
     template <typename T>
     std::string to_hex_string(const T &number);
 
+    // Human readable representation, specialized for the protocol types.
     template <typename T>
     std::string to_string(const T &t);
 } // namespace nasacpp

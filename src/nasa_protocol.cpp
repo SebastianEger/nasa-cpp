@@ -17,7 +17,7 @@ namespace nasacpp
         loop_thread_.join();
     }
 
-    void NasaProtocol::insertDataRx(const std::vector<uint8_t>& data)
+    void NasaProtocol::insertDataRx(const std::vector<uint8_t> &data)
     {
         std::lock_guard<std::mutex> lock(mtx_data_in_);
         data_in_.insert(data_in_.end(), data.begin(), data.end());

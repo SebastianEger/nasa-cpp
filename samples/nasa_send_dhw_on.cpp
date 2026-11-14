@@ -1,3 +1,5 @@
+// Sample: sends a single request that switches domestic hot water (DHW) on.
+
 #include <tcp_client.h>
 #include <nasa_protocol.h>
 

@@ -10,6 +10,8 @@
 
 namespace nasacpp
 {
+    // Current and requested value of one NASA message. Creates the packets that read the value
+    // or change it, including retries and the write protection of field settings.
     class NasaMsgHandler
     {
     public:
@@ -24,7 +26,7 @@ namespace nasacpp
         void updateValueNew(const int &val);
         const DataType &getDataType() const;
         void resetRetryCounter();
-        
+
         bool hasVal();
         int getVal();
 

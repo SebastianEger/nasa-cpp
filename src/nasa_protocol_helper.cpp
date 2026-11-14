@@ -8,21 +8,21 @@ namespace nasacpp
     std::string to_hex_string(const long &number)
     {
         char str[10];
-        snprintf(str, sizeof(str), "%02lx", number); // Use of snprintf for security reasons.
+        snprintf(str, sizeof(str), "%02lx", number);
         return std::string(str);
     }
 
     template <>
     std::string to_hex_string(const MessageNumber &number)
     {
-        return to_hex_string((long) number);
+        return to_hex_string((long)number);
     }
 
     template <>
     std::string to_hex_string(const std::vector<uint8_t> &data)
     {
         std::string str;
-        str.reserve(data.size() * 2); // Memory reservations are made to increase efficiency.
+        str.reserve(data.size() * 2);
         for (uint8_t byte : data)
         {
             char buf[3];
